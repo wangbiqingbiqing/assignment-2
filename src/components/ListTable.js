@@ -12,19 +12,19 @@ class ListTable extends Component {
   render() {
     let listData = this.props.data;
     let displayNum = this.props.displayNum;
-    console.log(displayNum, listData);
     let tableBody = [];
-    for (let j = 1; j <= Math.min(displayNum, listData.length); j++) {
+    for (let j = 1; j <= displayNum; j++) {
       let song = listData[j - 1];
       let tableRow = Object.entries(song).map(([key, value]) => {
-        if (key !== SONG_KEY.SONG_ID && key !== SONG_KEY.LYRICS) {
+        if (key !== SONG_KEY.SONG_ID ) {
+
           return (<TableCell key={value}>{value}</TableCell>)
         }
       });
-      tableBody.push(<TableRow key={song.songId}>
+      tableBody.push(<TableRow key={j}>
         <TableCell key={j}>{j}</TableCell>
         {tableRow}{this.props.isPeekList ? <TableCell>
-        <Button variant="outlined" size="small" color="inherit" onClick={() => this.props.skipSong(song.songId)}>
+        <Button variant="outlined" size="small" color="inherit" onClick={() => this.props.skipSong(j)}>
           skip
         </Button>
       </TableCell> : null}

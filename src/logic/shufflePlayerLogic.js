@@ -1,6 +1,6 @@
-var playList = [];
-var dynamicList=[];
-var queue=[];
+import {PLAYLIST_1} from "../constants/states";
+
+export var dynamicList=PLAYLIST_1.slice();
 
 /**
  * Shuffle the order of an given array.
@@ -30,7 +30,8 @@ export function setSong(dynamicList, queue) {
     if(dynamicList.length ===0){
         return queue;
     }else if(dynamicList.length ===1){
-        return queue.push(dynamicList);
+        queue.push(dynamicList[0]);
+        return queue;
     }else if(dynamicList.length ===2){
         var first = dynamicList[0];
         dynamicList.shift();
@@ -44,8 +45,7 @@ export function setSong(dynamicList, queue) {
             shuffle(dynamicList);
         }while(arraysEqual(dynamicList,shuffledArray)||(queue.length !==0?queue[queue.length-1]===dynamicList[0]:false));
         var queueAppended = queue.concat(dynamicList);
-        queue = queueAppended.slice();
-        return queue;
+        return queueAppended;
     }
 }
 
@@ -58,7 +58,7 @@ export function setSong(dynamicList, queue) {
 export function getNext(queue){
     //TODO think about when queue is 0 and how to initialize data
     if(queue.length ===0){
-        dynamicList= playList.slice();
+        // dynamicList= playList.slice();
         setSong(dynamicList,queue);
     }
     //TODO think about queue is null, playlist is null?
@@ -77,11 +77,11 @@ export function getNext(queue){
 export function getPeekQueue(queue,peekNum){
     //TODO think about when queue is 0 and how to initialize data
     if(queue.length ===0){
-        dynamicList= playList.slice();
-        setSong(dynamicList,queue);
+        // dynamicList= playList.slice();
+        queue = setSong(dynamicList,queue);
     }
     while(peekNum>=queue.length){
-        setSong(dynamicList,queue);
+        queue = setSong(dynamicList,queue);
     }
     return {peekQueue:queue.slice(1,peekNum+1),playingQueue:queue};
 }

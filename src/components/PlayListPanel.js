@@ -28,7 +28,6 @@ class PlayListPanel extends Component {
   }
 
   render() {
-    console.log(this.props.playList.length);
     const {classes} = this.props;
 
     return (
