@@ -1,7 +1,6 @@
 var playList = [];
 var dynamicList=[];
 var queue=[];
-var peekNum =5;
 
 /**
  * Shuffle the order of an given array.
@@ -27,7 +26,7 @@ function shuffle(array) {
  * @param {array} queue - A queue of the playing list.? should mention song or not????????????
  * @return {array} The same queue with the array appended.
  */
-function setSong(dynamicList, queue) {
+export function setSong(dynamicList, queue) {
     if(dynamicList.length ===0){
         return queue;
     }else if(dynamicList.length ===1){
@@ -54,9 +53,9 @@ function setSong(dynamicList, queue) {
  *  Remove current playing song in the queue and return the next song in the queue
  *
  * @param {array} queue - A queue of playing song list.
- * @return {number} The next song's songId.
+ * @return {object} A object with nextSong and playingQueue.
  */
-function getNext(queue){
+export function getNext(queue){
     //TODO think about when queue is 0 and how to initialize data
     if(queue.length ===0){
         dynamicList= playList.slice();
@@ -64,7 +63,7 @@ function getNext(queue){
     }
     //TODO think about queue is null, playlist is null?
     queue.shift();
-    return queue.length !==0?queue[0]: setSong(dynamicList,queue)[0];
+    return {nextSong:queue.length !==0?queue[0]: setSong(dynamicList,queue)[0],playingQueue:queue};
 }
 
 /**
@@ -73,9 +72,9 @@ function getNext(queue){
  *
  * @param {array} queue - A queue of playing song list.
  * @param {number} peekNum - A number which user wants to peek on the queue from the current song.
- * @return {array} The next peekNum songs.
+ * @return {object} A object with the peekQueue and playingQueue list.
  */
-function getPeekQueue(queue,peekNum){
+export function getPeekQueue(queue,peekNum){
     //TODO think about when queue is 0 and how to initialize data
     if(queue.length ===0){
         dynamicList= playList.slice();
@@ -84,7 +83,7 @@ function getPeekQueue(queue,peekNum){
     while(peekNum>=queue.length){
         setSong(dynamicList,queue);
     }
-    return queue.slice(1,peekNum+1);
+    return {peekQueue:queue.slice(1,peekNum+1),playingQueue:queue};
 }
 
 
@@ -95,7 +94,7 @@ function getPeekQueue(queue,peekNum){
  * @param {array} queue - A queue of playing song list.
  * @return {array} The queue which removed element on index already .
  */
-function skipSong(index, queue){
+export function skipSong(index, queue){
     queue.splice(index, 1);
     return queue;
 }
