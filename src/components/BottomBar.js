@@ -170,11 +170,11 @@ class BottomBar extends Component {
                       thumb={<LensIcon style={{color: '#2196f3'}}/>}
 
               />
-              <div>
-                <IconButton color="inherit">
-                  <Shuffle/>
-                </IconButton>
-              </div>
+              {/*<div>*/}
+                {/*<IconButton color="inherit">*/}
+                  {/*<Shuffle/>*/}
+                {/*</IconButton>*/}
+              {/*</div>*/}
               <div>
 
                 <IconButton color="inherit" onClick={this.props.getPeekList}>

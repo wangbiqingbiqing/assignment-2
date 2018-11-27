@@ -1,4 +1,4 @@
-import {PLAYLIST_1} from "../constants/states";
+import {PLAYLIST_1,PLAYLISTS} from "../constants/states";
 import {getNext, setSong, getPeekQueue, skipSong,dynamicList} from "../logic/shufflePlayerLogic";
 
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
@@ -67,15 +67,6 @@ export function setPeekNum(peekNum) {
   }
 }
 
-// export const SET_DYNAMIC_LIST = 'SET_DYNAMIC_LIST';
-//
-// export function setDynamicList(list){
-//   return{
-//       type:SET_DYNAMIC_LIST,
-//       list
-//   }
-// }
-
 export function resetPlayList() {
   return (dispatch, getState) => {
     const data = getState();
@@ -130,6 +121,12 @@ export function changePeekNum(peekNum) {
   }
 }
 
+export function getPlaylists(){
+    return (dispatch) => {
+        dispatch(setPlaylists(PLAYLISTS));
+    };
+}
+
 export function getPlaylist() {
   return (dispatch) => {
     dispatch(setPlaylist(PLAYLIST_1));
@@ -157,6 +154,7 @@ export function login() {
       const data = getState();
       let queue = data.playingQueue;
     dispatch(setLogin());
+    dispatch(getPlaylists());
     dispatch(getPlaylist());
     dispatch(resetPlayList());
   }

@@ -46,7 +46,7 @@ class PeekQueuePanel extends Component {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell></TableCell>
+                        <TableCell>{}</TableCell>
                         <TableCell>{SONG_KEY.SONG_NAME}</TableCell>
                         <TableCell>{SONG_KEY.ARTIST}</TableCell>
                         <TableCell>{SONG_KEY.ALBUM}</TableCell>
@@ -55,7 +55,7 @@ class PeekQueuePanel extends Component {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell></TableCell>
+                        <TableCell>{}</TableCell>
                         <TableCell>{this.props.currentSong.songName}</TableCell>
                         <TableCell>{this.props.currentSong.artist}</TableCell>
                         <TableCell>{this.props.currentSong.album}</TableCell>
@@ -101,7 +101,6 @@ class PeekQueuePanel extends Component {
         </div>
       </React.Fragment>
     );
-
   }
 }
 

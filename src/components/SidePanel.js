@@ -6,8 +6,11 @@ import Typography from "@material-ui/core/Typography/Typography";
 import React, {Component} from 'react';
 import Link from "react-router-dom/es/Link";
 
+/**
+ * This is a left side panel displaying different playlist name.
+ * Click playlist and view the songs included
+ */
 class SidePanel extends Component {
-
   render() {
 
     let tableData = [];
@@ -21,7 +24,6 @@ class SidePanel extends Component {
               </TableCell>
             </Link>
           </TableRow>))
-
     }
 
     return (

@@ -8,16 +8,15 @@ import {
     SET_PEEK_LIST,
     SET_CURRENT_SONG, SET_PLAYING_QUEUE, SET_PEEK_NUM,SET_DYNAMIC_LIST
 } from "../actions/actions";
-import {DEMO_SONG, DEFAULT_PLAYLISTS} from "../constants/states";
+import {DEMO_AUDIO, DEFAULT_PLAYLISTS} from "../constants/states";
 
 const defaultState = {
-    playList: [DEMO_SONG],
-    //dynamicList: [],
+    playList: [DEMO_AUDIO],
     peekList: [],
     isTurnedOn: false,
-    currentSong: DEMO_SONG,
+    currentSong: DEMO_AUDIO,
     isLoggedIn: false,
-    playLists: ['playlist 1'],
+    playLists: DEFAULT_PLAYLISTS,
     playingQueue: [],
     peekNum: 5
 };
@@ -56,12 +55,14 @@ export default function shufflePlayerData(state = defaultState, action) {
             };
         case SET_LOG_OUT:
             return {
-                ...state,
-                currentSong: DEMO_SONG,
-                playList: [DEMO_SONG],
+                currentSong: DEMO_AUDIO,
+                playList: [DEMO_AUDIO],
                 isLoggedIn: false,
-                peekList: [DEMO_SONG],
+                peekList: [],
                 playLists: DEFAULT_PLAYLISTS,
+                isTurnedOn: false,
+                playingQueue: [],
+                peekNum: 5
             };
         case SET_PEEK_LIST:
             return {
@@ -78,11 +79,6 @@ export default function shufflePlayerData(state = defaultState, action) {
                 ...state,
                 peekNum: action.peekNum
             };
-        // case SET_DYNAMIC_LIST:
-        //     return {
-        //         ...state,
-        //         dynamicList:action.list
-        //     }
         default:
             return state
     }
