@@ -1,5 +1,4 @@
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import Grid from "@material-ui/core/es/Grid/Grid";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
@@ -15,22 +14,33 @@ import React, {Component} from 'react'
 import Link from "react-router-dom/es/Link";
 import logo from '../pictures/teamSpiritLogo.PNG';
 
-const styles = theme => ({
+const styles = {
+  toolBar: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   appBar: {
     top: 'auto',
     bottom: 0,
   },
   playActions: {
-    width: '15%',
+    width: '20%',
     display: 'flex',
+    justifyContent: 'flex-start'
+  },
+  margin:{
+    marginLeft:'15px',
+    marginRight:'15px'
   },
   songInfo: {
-    width: '50%',
+    width: '60%',
     display: 'flex',
+    justifyContent: 'center',
   },
   playStatus: {
-    width: '35%',
+    width: '20%',
     display: 'flex',
+    justifyContent: 'flex-end'
   },
   image: {
     width: 30,
@@ -54,7 +64,7 @@ const styles = theme => ({
   root: {
     width: '50%',
   }
-})
+};
 
 class BottomBar extends Component {
 
@@ -119,9 +129,9 @@ class BottomBar extends Component {
 
     return (
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Grid container>
-            <Grid item xs={2} className={classes.playActions}>
+        <Toolbar className={classes.toolBar}>
+
+            <div className={classes.playActions}>
               <IconButton color="inherit">
                 {!this.props.isPlayOn ?
                   <PlayArrow onClick={this.props.handleSwitchOn}/> :
@@ -132,11 +142,11 @@ class BottomBar extends Component {
                   <SkipNext onClick={this.playNext}/>
                 </Link>
               </IconButton>
-            </Grid>
-            <Grid item xs={6} className={classes.songInfo}>
-              <div><img className={classes.image} src={logo} alt="TeamSpirit"/></div>
-              <div>{this.props.song.songName}</div>
-              <Slider value={this.state.playingTime} onChange={this.playingTimeChange}
+            </div>
+            <div className={classes.songInfo}>
+              <div className={classes.margin}><img className={classes.image} src={logo} alt="TeamSpirit"/></div>
+              <div className={classes.margin}>{this.props.song.songName}</div>
+              <Slider className={classes.margin} value={this.state.playingTime} onChange={this.playingTimeChange}
                       classes={{
                         container: classes.slider,
                         thumbIconWrapper: classes.thumbIconWrapper,
@@ -147,9 +157,9 @@ class BottomBar extends Component {
                       thumb={<LensIcon style={{color: '#2196f3'}}
                       />}
               />
-            </Grid>
+            </div>
 
-            <Grid item xs={4} className={classes.playStatus}>
+            <div className={classes.playStatus}>
               <div>
                 <IconButton color="inherit">
                   {!this.state.mute ?
@@ -181,8 +191,7 @@ class BottomBar extends Component {
                   </Link>
                 </IconButton>
               </div>
-            </Grid>
-          </Grid>
+            </div>
         </Toolbar>
       </AppBar>
     )
