@@ -1,4 +1,3 @@
-import Button from "@material-ui/core/es/Button/Button";
 import Table from "@material-ui/core/es/Table/Table";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import TableCell from "@material-ui/core/es/TableCell/TableCell";
@@ -6,6 +5,10 @@ import TableHead from "@material-ui/core/es/TableHead/TableHead";
 import TableRow from "@material-ui/core/es/TableRow/TableRow";
 import React, {Component} from 'react';
 import {SONG_KEY} from "../constants/keys";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import Redo from '@material-ui/icons/Redo';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import Tooltip from '@material-ui/core/Tooltip';
 
 class ListTable extends Component {
 
@@ -24,9 +27,16 @@ class ListTable extends Component {
       tableBody.push(<TableRow key={j}>
         <TableCell key={j}>{j}</TableCell>
         {tableRow}{this.props.isPeekList ? <TableCell>
-        <Button variant="outlined" size="small" color="inherit" onClick={() => this.props.skipSong(j)}>
-          skip
-        </Button>
+        <IconButton variant="outlined" size="small" color="inherit" >
+            <Tooltip title="skip this song" placement="left">
+          <Redo onClick={() => this.props.skipSong(j)}/>
+            </Tooltip>
+        </IconButton>
+          <IconButton variant="outlined" size="small" color="inherit" >
+              <Tooltip title="play this song" placement="right">
+              <PlayArrow onClick={() => this.props.jumpToPlay(j)}/>
+              </Tooltip>
+          </IconButton>
       </TableCell> : null}
       </TableRow>)
     }

@@ -7,7 +7,6 @@ import LensIcon from '@material-ui/icons/LensOutlined';
 import Pause from '@material-ui/icons/Pause';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import QueueMusic from '@material-ui/icons/QueueMusic'
-import Shuffle from '@material-ui/icons/Shuffle';
 import SkipNext from '@material-ui/icons/SkipNext';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import VolumeUp from '@material-ui/icons/VolumeUp';

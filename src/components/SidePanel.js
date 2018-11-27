@@ -28,8 +28,8 @@ class SidePanel extends Component {
 
     return (
       <React.Fragment>
-        <div style={{height: '800px', borderRight: 'grey solid', marginTop: '64px'}}>
-          <Typography align="center">
+        <div style={{height: '100%',minHeight:700, borderRight: 'grey solid', marginTop: '64px'}}>
+          <Typography align="center" variant="h5">
             PlayList
           </Typography>
           {typeof(this.props.data) === 'string' ? this.props.data : null}

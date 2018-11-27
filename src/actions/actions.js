@@ -1,5 +1,5 @@
 import {PLAYLIST_1,PLAYLISTS} from "../constants/states";
-import {getNext, setSong, getPeekQueue, skipSong,dynamicList} from "../logic/shufflePlayerLogic";
+import {dynamicList,getNext, setSong, getPeekQueue, skipSong,startPlayingWithSong} from "../logic/shufflePlayerLogic";
 
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
 
@@ -112,6 +112,17 @@ export function skipSongAction(skippedIndex) {
     dispatch(setPlayingQueue(queue));
     dispatch(getPeekList());
   }
+}
+
+export function junmpToPlaySong(playingIndex){
+    return (dispatch, getState) => {
+        const data = getState();
+        let queue = data.playingQueue;
+        queue = startPlayingWithSong(playingIndex, queue);
+        dispatch(setCurrent(queue[0]))
+        dispatch(setPlayingQueue(queue));
+        dispatch(getPeekList());
+    }
 }
 
 export function changePeekNum(peekNum) {

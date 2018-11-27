@@ -68,7 +68,7 @@ class PeekQueuePanel extends Component {
             </Grid>
             <Grid item xs={10}>
               <Grid container>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                   <div>
                     <div>
                       Next Up
@@ -82,16 +82,17 @@ class PeekQueuePanel extends Component {
                         onChange={(event)=>this.props.changePeekNumber(event.target.value)}
                         InputProps={{inputProps: {min: 0}}}
                         inputProps={{
-                          'aria-label': 'peek number',
+                          'aria-label': 'peek number'
                         }}
                       />
                     </div>
                   </div>
                 </Grid>
-                {this.props.peekList.length !== 0 && this.props.isLoggedIn && <Grid item xs={10}>
+                {this.props.peekList.length !== 0 && this.props.isLoggedIn && <Grid item xs={12}>
                   <Paper>
                     <ListTable data={this.props.peekList} isPeekList={true}
-                               skipSong={(songId) => this.props.skipSong(songId)}
+                               skipSong={(queueIndex) => this.props.skipSong(queueIndex)}
+                               jumpToPlay={(queueIndex) => this.props.jumpToPlay(queueIndex)}
                                displayNum={peekNum}/>
                   </Paper>
                 </Grid>}
