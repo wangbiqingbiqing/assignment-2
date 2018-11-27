@@ -57,7 +57,7 @@ const styles = theme => ({
     width: 30,
     height: 30,
   }
-})
+});
 
 class HeaderBar extends Component {
   constructor(props) {
@@ -72,8 +72,6 @@ class HeaderBar extends Component {
 
   render() {
     const {classes} = this.props;
-    let text = this.props.isLoggedIn;
-
     return (
       <AppBar position="fixed">
         <Toolbar className={classes.toolBar}>

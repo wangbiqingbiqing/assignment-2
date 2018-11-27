@@ -8,11 +8,11 @@ import Link from "react-router-dom/es/Link";
 import SongListTable from "./ListTable";
 import Shuffle from '@material-ui/icons/Shuffle';
 
-const styles = theme => ({
+const styles = {
   margin: {
     marginTop: '5%'
   }
-})
+};
 
 class PlayListPanel extends Component {
   constructor(props) {
@@ -39,22 +39,26 @@ class PlayListPanel extends Component {
               Playlist
             </Typography>
           </Grid>
-          <Grid item xs={10}>
-
-            <div style={{float: 'right'}}>
-              <IconButton color="inherit">
-                <Link to="/peeklist" style={{textDecoration: 'none'}}>
-                  <Shuffle onClick={this.playPlaylist}/>
-                </Link>
-              </IconButton>
-            </div>
-          </Grid>
-
-          <Grid item xs={10}>
-            <Paper>
-              <SongListTable data={this.props.playList} isPeekList={false} displayNum={this.props.playList.length}/>
-            </Paper>
-          </Grid>
+          {this.props.playList.length === 0 ? null :
+            <Grid item xs={10}>
+              <div style={{float: 'right'}}>
+                <IconButton color="inherit">
+                  <Link to="/peeklist" style={{textDecoration: 'none'}}>
+                    <Shuffle onClick={this.playPlaylist}/>
+                  </Link>
+                </IconButton>
+              </div>
+            </Grid>
+          }
+          {
+            this.props.playList.length === 0 ?
+              <div>No song in this playlist. Please check again!</div> :
+              <Grid item xs={10}>
+                <Paper>
+                  <SongListTable data={this.props.playList} isPeekList={false} displayNum={this.props.playList.length}/>
+                </Paper>
+              </Grid>
+          }
         </Grid>
       </React.Fragment>
     );

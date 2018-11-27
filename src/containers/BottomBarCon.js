@@ -3,8 +3,6 @@ import {withRouter} from "react-router";
 import {
   getPeekList,
   playNextSong,
-  playNextSongAndUpdatePeekList,
-  playPreviousSongAndUpdatePeekList,
   turnOffPlayer,
   turnOnPlayer
 } from "../actions/actions";

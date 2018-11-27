@@ -119,7 +119,7 @@ export function junmpToPlaySong(playingIndex) {
     const data = getState();
     let queue = data.playingQueue;
     queue = startPlayingWithSong(playingIndex, queue);
-    dispatch(setCurrent(queue[0]))
+    dispatch(setCurrent(queue[0]));
     dispatch(setPlayingQueue(queue));
     dispatch(getPeekList());
   }
@@ -161,9 +161,7 @@ export function setLogout() {
 }
 
 export function login() {
-  return (dispatch, getState) => {
-    const data = getState();
-    let queue = data.playingQueue;
+  return (dispatch) => {
     dispatch(setLogin());
     dispatch(getPlaylists());
     dispatch(getPlaylist());

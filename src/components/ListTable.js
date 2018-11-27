@@ -20,7 +20,6 @@ class ListTable extends Component {
       let song = listData[j - 1];
       let tableRow = Object.entries(song).map(([key, value]) => {
         if (key !== SONG_KEY.SONG_ID) {
-
           return (<TableCell key={value}>{value}</TableCell>)
         }
       });

@@ -9,7 +9,7 @@ export var dynamicList = PLAYLIST_1.slice();
  * @return {array} The same array in shuffled order
  */
 function shuffle(array) {
-  var m = array.length, t, i;
+  let m = array.length, t, i;
   while (m) {
     i = Math.floor(Math.random() * m--);
     t = array[m];
@@ -35,24 +35,25 @@ function shuffle(array) {
  * @return {array} The same queue with the songs appended in different shuffled order.
  */
 export function setSong(dynamicList, queue) {
+  let queueAppended;
   if (dynamicList.length === 0) {
     return queue;
   } else if (dynamicList.length === 1) {
     queue.push(dynamicList[0]);
     return queue;
   } else if (dynamicList.length === 2) {
-    var first = dynamicList[0];
+    const first = dynamicList[0];
     dynamicList.shift();
     dynamicList.push(first);
-    var queueAppended = queue.concat(dynamicList);
+    queueAppended = queue.concat(dynamicList);
     queue = queueAppended.slice();
     return queue;
   } else {
-    var shuffledArray = dynamicList.slice();
+    let shuffledArray = dynamicList.slice();
     do {
       shuffle(dynamicList);
     } while (arraysEqual(dynamicList, shuffledArray) || (queue.length !== 0 ? queue[queue.length - 1] === dynamicList[0] : false));
-    var queueAppended = queue.concat(dynamicList);
+    queueAppended = queue.concat(dynamicList);
     return queueAppended;
   }
 }
@@ -126,14 +127,14 @@ export function startPlayingWithSong(index, queue) {
 /**
  *  Check the equality of two given array.
  *
- * @param {array} array1
- * @param {array} array2
+ * @param {array} arr1
+ * @param {array} arr2
  * @return {boolean} Return true when two arrays equal, else false.
  */
 function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length)
     return false;
-  for (var i = arr1.length; i--;) {
+  for (let i = arr1.length; i--;) {
     if (arr1[i] !== arr2[i])
       return false;
   }
