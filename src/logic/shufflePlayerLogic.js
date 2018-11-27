@@ -1,6 +1,6 @@
 import {PLAYLIST_1} from "../constants/states";
 
-export var dynamicList=PLAYLIST_1.slice();
+export var dynamicList = PLAYLIST_1.slice();
 
 /**
  * Shuffle the order of an given array by Fisher-Yates shuffle algorithm
@@ -9,14 +9,14 @@ export var dynamicList=PLAYLIST_1.slice();
  * @return {array} The same array in shuffled order
  */
 function shuffle(array) {
-    var m = array.length, t, i;
-    while (m) {
-        i = Math.floor(Math.random() * m--);
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-    }
-    return array;
+  var m = array.length, t, i;
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
 }
 
 /**
@@ -35,26 +35,26 @@ function shuffle(array) {
  * @return {array} The same queue with the songs appended in different shuffled order.
  */
 export function setSong(dynamicList, queue) {
-    if(dynamicList.length ===0){
-        return queue;
-    }else if(dynamicList.length ===1){
-        queue.push(dynamicList[0]);
-        return queue;
-    }else if(dynamicList.length ===2){
-        var first = dynamicList[0];
-        dynamicList.shift();
-        dynamicList.push(first);
-        var queueAppended = queue.concat(dynamicList);
-        queue = queueAppended.slice();
-        return queue;
-    }else{
-        var shuffledArray = dynamicList.slice();
-        do {
-            shuffle(dynamicList);
-        }while(arraysEqual(dynamicList,shuffledArray)||(queue.length !==0?queue[queue.length-1]===dynamicList[0]:false));
-        var queueAppended = queue.concat(dynamicList);
-        return queueAppended;
-    }
+  if (dynamicList.length === 0) {
+    return queue;
+  } else if (dynamicList.length === 1) {
+    queue.push(dynamicList[0]);
+    return queue;
+  } else if (dynamicList.length === 2) {
+    var first = dynamicList[0];
+    dynamicList.shift();
+    dynamicList.push(first);
+    var queueAppended = queue.concat(dynamicList);
+    queue = queueAppended.slice();
+    return queue;
+  } else {
+    var shuffledArray = dynamicList.slice();
+    do {
+      shuffle(dynamicList);
+    } while (arraysEqual(dynamicList, shuffledArray) || (queue.length !== 0 ? queue[queue.length - 1] === dynamicList[0] : false));
+    var queueAppended = queue.concat(dynamicList);
+    return queueAppended;
+  }
 }
 
 /**
@@ -63,15 +63,15 @@ export function setSong(dynamicList, queue) {
  * @param {array} queue - A queue of playing song list.
  * @return {object} A object with nextSong and playingQueue.
  */
-export function getNext(queue){
-    //TODO think about when queue is 0 and how to initialize data
-    if(queue.length ===0){
-        // dynamicList= playList.slice();
-        setSong(dynamicList,queue);
-    }
-    //TODO think about queue is null, playlist is null?
-    queue.shift();
-    return {nextSong:queue.length !==0?queue[0]: setSong(dynamicList,queue)[0],playingQueue:queue};
+export function getNext(queue) {
+  //TODO think about when queue is 0 and how to initialize data
+  if (queue.length === 0) {
+    // dynamicList= playList.slice();
+    setSong(dynamicList, queue);
+  }
+  //TODO think about queue is null, playlist is null?
+  queue.shift();
+  return {nextSong: queue.length !== 0 ? queue[0] : setSong(dynamicList, queue)[0], playingQueue: queue};
 }
 
 /**
@@ -85,16 +85,16 @@ export function getNext(queue){
  * @param {number} peekNum - A number which user wants to peek on the queue from the current song.
  * @return {object} A object with the peekQueue and playingQueue list.
  */
-export function getPeekQueue(queue,peekNum){
-    //TODO think about when queue is 0 and how to initialize data
-    if(queue.length ===0){
-        // dynamicList= playList.slice();
-        queue = setSong(dynamicList,queue);
-    }
-    while(peekNum>=queue.length){
-        queue = setSong(dynamicList,queue);
-    }
-    return {peekQueue:queue.slice(1,peekNum+1),playingQueue:queue};
+export function getPeekQueue(queue, peekNum) {
+  //TODO think about when queue is 0 and how to initialize data
+  if (queue.length === 0) {
+    // dynamicList= playList.slice();
+    queue = setSong(dynamicList, queue);
+  }
+  while (peekNum >= queue.length) {
+    queue = setSong(dynamicList, queue);
+  }
+  return {peekQueue: queue.slice(1, peekNum + 1), playingQueue: queue};
 }
 
 /**
@@ -105,9 +105,9 @@ export function getPeekQueue(queue,peekNum){
  * @param {array} queue - A queue of playing song list.
  * @return {array} The queue which removed element on index already .
  */
-export function skipSong(index, queue){
-    queue.splice(index, 1);
-    return queue;
+export function skipSong(index, queue) {
+  queue.splice(index, 1);
+  return queue;
 }
 
 /**
@@ -118,9 +118,9 @@ export function skipSong(index, queue){
  * @param {array} queue - A queue of playing song list.
  * @return {array} The updated queue with chosen song as the current play.
  */
-export function startPlayingWithSong(index, queue){
-    queue.splice(0,index);
-    return queue;
+export function startPlayingWithSong(index, queue) {
+  queue.splice(0, index);
+  return queue;
 }
 
 /**
@@ -131,11 +131,11 @@ export function startPlayingWithSong(index, queue){
  * @return {boolean} Return true when two arrays equal, else false.
  */
 function arraysEqual(arr1, arr2) {
-    if(arr1.length !== arr2.length)
-        return false;
-    for(var i = arr1.length; i--;) {
-        if(arr1[i] !== arr2[i])
-            return false;
-    }
-    return true;
+  if (arr1.length !== arr2.length)
+    return false;
+  for (var i = arr1.length; i--;) {
+    if (arr1[i] !== arr2[i])
+      return false;
+  }
+  return true;
 }

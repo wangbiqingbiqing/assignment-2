@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {composeWithDevTools} from "redux-devtools-extension";
-import {createStore, applyMiddleware} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import App from './App';
 import shufflePlayerData from "./reducers/shufflePlayerData";
 import * as serviceWorker from './serviceWorker';

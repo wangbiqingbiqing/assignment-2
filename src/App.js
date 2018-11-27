@@ -1,6 +1,6 @@
 import Grid from "@material-ui/core/Grid/Grid";
 import React, {Component} from 'react';
-import {Switch, Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import './App.css';
 import BottomBarCon from "./containers/BottomBarCon";
 import HeaderBarCon from "./containers/HeaderBarCon";
@@ -25,7 +25,7 @@ class App extends Component {
               <Route exact path={'/playlist'} component={PlayListPanelCon}/>
               <Route exact path={'/peeklist'} component={PeekQueuePanelCon}/>
               {/*<Route exact path={'/'}*/}
-                     {/*render={() => <WelcomePage text={'Log in to shuffle your playlist!'}/>}*/}
+              {/*render={() => <WelcomePage text={'Log in to shuffle your playlist!'}/>}*/}
               {/*/>*/}
             </Switch>
           </Grid>

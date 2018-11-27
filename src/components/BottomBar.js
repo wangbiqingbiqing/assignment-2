@@ -77,7 +77,6 @@ class BottomBar extends Component {
     if (this.props.isLoggedIn) {
       this.props.playNext();
     }
-
   }
 
   muteVolume() {
@@ -170,9 +169,9 @@ class BottomBar extends Component {
 
               />
               {/*<div>*/}
-                {/*<IconButton color="inherit">*/}
-                  {/*<Shuffle/>*/}
-                {/*</IconButton>*/}
+              {/*<IconButton color="inherit">*/}
+              {/*<Shuffle/>*/}
+              {/*</IconButton>*/}
               {/*</div>*/}
               <div>
 

@@ -1,11 +1,12 @@
 import connect from "react-redux/es/connect/connect";
 import {withRouter} from "react-router";
 import {
-  turnOnPlayer,
-  turnOffPlayer,
   getPeekList,
+  playNextSong,
   playNextSongAndUpdatePeekList,
-  playPreviousSongAndUpdatePeekList, playNextSong
+  playPreviousSongAndUpdatePeekList,
+  turnOffPlayer,
+  turnOnPlayer
 } from "../actions/actions";
 import BottomBar from "../components/BottomBar";
 

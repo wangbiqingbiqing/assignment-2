@@ -1,5 +1,5 @@
 import connect from "react-redux/es/connect/connect";
-import {getPeekList, skipSongAction, changePeekNum,junmpToPlaySong} from "../actions/actions";
+import {changePeekNum, getPeekList, junmpToPlaySong, skipSongAction} from "../actions/actions";
 import PeekQueuePanel from "../components/PeekQueuePanel";
 
 const PeekQueuePanelCon = connect(
@@ -12,8 +12,8 @@ const PeekQueuePanelCon = connect(
   dispatch => ({
     getPeekList: () => dispatch(getPeekList()),
     skipSong: (queueIndex) => dispatch(skipSongAction(queueIndex)),
-      jumpToPlay:(queueIndex) => dispatch(junmpToPlaySong(queueIndex)),
-    changePeekNumber:(peekNum) => dispatch(changePeekNum(peekNum)),
+    jumpToPlay: (queueIndex) => dispatch(junmpToPlaySong(queueIndex)),
+    changePeekNumber: (peekNum) => dispatch(changePeekNum(peekNum)),
   })
 )(PeekQueuePanel)
 export default PeekQueuePanelCon

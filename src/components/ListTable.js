@@ -19,7 +19,7 @@ class ListTable extends Component {
     for (let j = 1; j <= displayNum; j++) {
       let song = listData[j - 1];
       let tableRow = Object.entries(song).map(([key, value]) => {
-        if (key !== SONG_KEY.SONG_ID ) {
+        if (key !== SONG_KEY.SONG_ID) {
 
           return (<TableCell key={value}>{value}</TableCell>)
         }
@@ -27,16 +27,16 @@ class ListTable extends Component {
       tableBody.push(<TableRow key={j}>
         <TableCell key={j}>{j}</TableCell>
         {tableRow}{this.props.isPeekList ? <TableCell>
-        <IconButton variant="outlined" size="small" color="inherit" >
-            <Tooltip title="skip this song" placement="left">
-          <Redo onClick={() => this.props.skipSong(j)}/>
-            </Tooltip>
+        <IconButton variant="outlined" size="small" color="inherit">
+          <Tooltip title="skip this song" placement="left">
+            <Redo onClick={() => this.props.skipSong(j)}/>
+          </Tooltip>
         </IconButton>
-          <IconButton variant="outlined" size="small" color="inherit" >
-              <Tooltip title="play this song" placement="right">
-              <PlayArrow onClick={() => this.props.jumpToPlay(j)}/>
-              </Tooltip>
-          </IconButton>
+        <IconButton variant="outlined" size="small" color="inherit">
+          <Tooltip title="play this song" placement="right">
+            <PlayArrow onClick={() => this.props.jumpToPlay(j)}/>
+          </Tooltip>
+        </IconButton>
       </TableCell> : null}
       </TableRow>)
     }

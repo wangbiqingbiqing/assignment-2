@@ -79,7 +79,7 @@ class PeekQueuePanel extends Component {
                         className={classes.textField}
                         type="number"
                         value={peekNum}
-                        onChange={(event)=>this.props.changePeekNumber(event.target.value)}
+                        onChange={(event) => this.props.changePeekNumber(event.target.value)}
                         InputProps={{inputProps: {min: 0}}}
                         inputProps={{
                           'aria-label': 'peek number'

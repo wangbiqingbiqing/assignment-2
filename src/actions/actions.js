@@ -1,5 +1,5 @@
-import {PLAYLIST_1,PLAYLISTS} from "../constants/states";
-import {dynamicList,getNext, setSong, getPeekQueue, skipSong,startPlayingWithSong} from "../logic/shufflePlayerLogic";
+import {PLAYLIST_1, PLAYLISTS} from "../constants/states";
+import {dynamicList, getNext, getPeekQueue, setSong, skipSong, startPlayingWithSong} from "../logic/shufflePlayerLogic";
 
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
 
@@ -62,7 +62,7 @@ export const SET_PEEK_NUM = 'SET_PEEK_NUM';
 
 export function setPeekNum(peekNum) {
   return {
-    type:SET_PEEK_NUM,
+    type: SET_PEEK_NUM,
     peekNum,
   }
 }
@@ -114,15 +114,15 @@ export function skipSongAction(skippedIndex) {
   }
 }
 
-export function junmpToPlaySong(playingIndex){
-    return (dispatch, getState) => {
-        const data = getState();
-        let queue = data.playingQueue;
-        queue = startPlayingWithSong(playingIndex, queue);
-        dispatch(setCurrent(queue[0]))
-        dispatch(setPlayingQueue(queue));
-        dispatch(getPeekList());
-    }
+export function junmpToPlaySong(playingIndex) {
+  return (dispatch, getState) => {
+    const data = getState();
+    let queue = data.playingQueue;
+    queue = startPlayingWithSong(playingIndex, queue);
+    dispatch(setCurrent(queue[0]))
+    dispatch(setPlayingQueue(queue));
+    dispatch(getPeekList());
+  }
 }
 
 export function changePeekNum(peekNum) {
@@ -132,10 +132,10 @@ export function changePeekNum(peekNum) {
   }
 }
 
-export function getPlaylists(){
-    return (dispatch) => {
-        dispatch(setPlaylists(PLAYLISTS));
-    };
+export function getPlaylists() {
+  return (dispatch) => {
+    dispatch(setPlaylists(PLAYLISTS));
+  };
 }
 
 export function getPlaylist() {
@@ -161,9 +161,9 @@ export function setLogout() {
 }
 
 export function login() {
-  return (dispatch,getState) => {
-      const data = getState();
-      let queue = data.playingQueue;
+  return (dispatch, getState) => {
+    const data = getState();
+    let queue = data.playingQueue;
     dispatch(setLogin());
     dispatch(getPlaylists());
     dispatch(getPlaylist());
