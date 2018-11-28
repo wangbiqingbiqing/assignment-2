@@ -20,14 +20,14 @@ function shuffle(array) {
 }
 
 /**
- * Set songs into given queue and return the updated queue.
+ * Set shuffled songs into given queue and return the updated queue.
  * The songs are in the shuffled order which is different from previous round.
  *
  * When there is 0 song, return queue as it is
  * When there is 1 song, directly append to queue
  * When there is 2 songs, change the order to differentiate from last round and append to queue
  * When there is more than 2 songs, shuffle the order to guarantee it's different from last round,
- * also the first song in the next round is not the last song in current round, return the updated queue with next round appended
+ * the first song in the next round is not same as the last song in current round, either the current playing song return the updated queue with next round appended
  *
  *
  * @param {array} dynamicList - A array of songs in a playlist
@@ -49,10 +49,10 @@ export function setSong(dynamicList, queue) {
     queue = queueAppended.slice();
     return queue;
   } else {
-    let shuffledArray = dynamicList.slice();
+    dynamicList.slice();
     do {
       shuffle(dynamicList);
-    } while (arraysEqual(dynamicList, shuffledArray) || (queue.length !== 0 ? queue[queue.length - 1] === dynamicList[0] : false));
+    } while (queue[queue.length - 1] === dynamicList[0] || queue[0] === dynamicList[0]);
     queueAppended = queue.concat(dynamicList);
     return queueAppended;
   }
@@ -60,38 +60,33 @@ export function setSong(dynamicList, queue) {
 
 /**
  *  Remove current playing song in the queue and return the next song in the queue
+ *  When playing queue only contains current playing song, which is no next song on the queue,
+ *  set playing queue and then get next song
  *
  * @param {array} queue - A queue of playing song list.
  * @return {object} A object with nextSong and playingQueue.
  */
 export function getNext(queue) {
-  //TODO think about when queue is 0 and how to initialize data
-  if (queue.length === 0) {
+  if (queue.length === 1) {
     // dynamicList= playList.slice();
-    setSong(dynamicList, queue);
+    queue = setSong(dynamicList, queue);
   }
-  //TODO think about queue is null, playlist is null?
   queue.shift();
-  return {nextSong: queue.length !== 0 ? queue[0] : setSong(dynamicList, queue)[0], playingQueue: queue};
+  return {nextSong: queue[0], playingQueue: queue};
 }
 
 /**
  *  Return the number of peekNum songs going to play on the queue.
  *  This method does not change the existing playing queue's order but returns a new array of peekNum songs with same order.
  *
- *  When peekNum is larger than the number of playing queue, generate a new shuffled round and append to playing queue,
- *  until the playing queue has enough songs for peek
+ *  When peekNum is larger than the number of the rest song on playing queue, set playing queue,
+ *  until the playing queue has enough rest songs for peek
  *
  * @param {array} queue - A queue of playing song list.
  * @param {number} peekNum - A number which user wants to peek on the queue from the current song.
  * @return {object} A object with the peekQueue and playingQueue list.
  */
 export function getPeekQueue(queue, peekNum) {
-  //TODO think about when queue is 0 and how to initialize data
-  if (queue.length === 0) {
-    // dynamicList= playList.slice();
-    queue = setSong(dynamicList, queue);
-  }
   while (peekNum >= queue.length) {
     queue = setSong(dynamicList, queue);
   }
@@ -124,19 +119,3 @@ export function startPlayingWithSong(index, queue) {
   return queue;
 }
 
-/**
- *  Check the equality of two given array.
- *
- * @param {array} arr1
- * @param {array} arr2
- * @return {boolean} Return true when two arrays equal, else false.
- */
-function arraysEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length)
-    return false;
-  for (let i = arr1.length; i--;) {
-    if (arr1[i] !== arr2[i])
-      return false;
-  }
-  return true;
-}

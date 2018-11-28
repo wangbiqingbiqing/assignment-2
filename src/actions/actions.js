@@ -71,11 +71,10 @@ export function resetPlayList() {
   return (dispatch, getState) => {
     const data = getState();
     let queue = data.playingQueue;
-    //TODO check current song is not equal to next round first
+    queue.splice(1,queue.length-1);
     queue = setSong(dynamicList, queue);
     dispatch(setPlayingQueue(queue));
-    dispatch(setCurrent(queue[0]));
-    dispatch(getPeekList());
+    dispatch(playNextSong());
   }
 }
 
@@ -164,15 +163,14 @@ export function login() {
   return (dispatch) => {
     dispatch(setLogin());
     dispatch(getPlaylists());
-    dispatch(getPlaylist());
-    dispatch(resetPlayList());
+    // dispatch(getPlaylist());
+    // dispatch(resetPlayList());
   }
 }
 
 export function logout() {
   return (dispatch) => {
     dispatch(setLogout());
-    //TODO set to initial value
   }
 }
 

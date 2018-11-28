@@ -13,13 +13,13 @@ import {
 import {DEFAULT_PLAYLISTS, DEMO_AUDIO} from "../constants/states";
 
 const defaultState = {
-  playList: [DEMO_AUDIO],
+  playList: [],
   peekList: [],
   isTurnedOn: false,
   currentSong: DEMO_AUDIO,
   isLoggedIn: false,
   playLists: DEFAULT_PLAYLISTS,
-  playingQueue: [],
+  playingQueue: [DEMO_AUDIO],
   peekNum: 5
 };
 

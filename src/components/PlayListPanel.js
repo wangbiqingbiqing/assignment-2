@@ -52,7 +52,7 @@ class PlayListPanel extends Component {
           }
           {
             this.props.playList.length === 0 ?
-              <div>No song in this playlist. Please check again!</div> :
+              <div>Opps, no song in this playlist. You can shuffle other lists!</div> :
               <Grid item xs={10}>
                 <Paper>
                   <SongListTable data={this.props.playList} isPeekList={false} displayNum={this.props.playList.length}/>
