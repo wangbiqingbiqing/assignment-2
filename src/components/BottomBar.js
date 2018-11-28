@@ -14,6 +14,7 @@ import Slider from "@material-ui/lab/es/Slider/Slider";
 import React, {Component} from 'react'
 import Link from "react-router-dom/es/Link";
 import logo from '../pictures/teamSpiritLogo.PNG';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {
   toolBar: {
@@ -29,9 +30,9 @@ const styles = {
     display: 'flex',
     justifyContent: 'flex-start'
   },
-  margin:{
-    marginLeft:'15px',
-    marginRight:'15px'
+  margin: {
+    marginLeft: '15px',
+    marginRight: '15px'
   },
   songInfo: {
     width: '60%',
@@ -132,67 +133,72 @@ class BottomBar extends Component {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
 
-            <div className={classes.playActions}>
+          <div className={classes.playActions}>
+            <IconButton color="inherit">
+              {!this.props.isPlayOn ?
+                <PlayArrow onClick={this.props.handleSwitchOn}/> :
+                <Pause onClick={this.props.handleSwitchOff}/>}
+            </IconButton>
+            <IconButton aria-label="Next" color="inherit">
+              <Link to="/peeklist" style={{textDecoration: 'none', color: 'white'}}>
+                <SkipNext onClick={this.playNext}/>
+              </Link>
+            </IconButton>
+          </div>
+          <div className={classes.songInfo}>
+            <div className={classes.margin}><img className={classes.image} src={logo} alt="TeamSpirit"/></div>
+            <div className={classes.margin}>{this.props.song.songName}</div>
+            <Slider className={classes.margin} value={this.state.playingTime} onChange={this.playingTimeChange}
+                    classes={{
+                      container: classes.slider,
+                      thumbIconWrapper: classes.thumbIconWrapper,
+                      trackBefore: classes.trackBefore,
+                      trackAfter: classes.trackAfter,
+                      root: classes.root,
+                    }}
+                    thumb={<LensIcon style={{color: '#2196f3'}}
+                    />}
+            />
+          </div>
+
+          <div className={classes.playStatus}>
+            <div>
               <IconButton color="inherit">
-                {!this.props.isPlayOn ?
-                  <PlayArrow onClick={this.props.handleSwitchOn}/> :
-                  <Pause onClick={this.props.handleSwitchOff}/>}
+                {!this.state.mute ?
+                  (<VolumeUp onClick={this.muteVolume}/>)
+                  :
+                  (<VolumeOff onClick={this.resetVolume}/>)}
               </IconButton>
-              <IconButton aria-label="Next" color="inherit">
+            </div>
+            <Slider value={this.state.volume} onChange={this.volumeChange}
+                    classes={{
+                      container: classes.slider,
+                      thumbIconWrapper: classes.thumbIconWrapper,
+                      trackBefore: classes.trackBefore,
+                      trackAfter: classes.trackAfter,
+                      root: classes.root,
+                    }}
+                    thumb={<LensIcon style={{color: '#2196f3'}}/>}
+
+            />
+            <div>
+              <IconButton color="inherit">
+                <Tooltip title="Reshuffle Queue" placement="left">
+                  <Shuffle onClick={this.props.resetPlayQueue}/>
+                </Tooltip>
+              </IconButton>
+            </div>
+            <div>
+
+              <IconButton color="inherit" onClick={this.props.getPeekList}>
                 <Link to="/peeklist" style={{textDecoration: 'none', color: 'white'}}>
-                  <SkipNext onClick={this.playNext}/>
+                  <Tooltip title="View Queue" placement="left">
+                    <QueueMusic/>
+                  </Tooltip>
                 </Link>
               </IconButton>
             </div>
-            <div className={classes.songInfo}>
-              <div className={classes.margin}><img className={classes.image} src={logo} alt="TeamSpirit"/></div>
-              <div className={classes.margin}>{this.props.song.songName}</div>
-              <Slider className={classes.margin} value={this.state.playingTime} onChange={this.playingTimeChange}
-                      classes={{
-                        container: classes.slider,
-                        thumbIconWrapper: classes.thumbIconWrapper,
-                        trackBefore: classes.trackBefore,
-                        trackAfter: classes.trackAfter,
-                        root: classes.root,
-                      }}
-                      thumb={<LensIcon style={{color: '#2196f3'}}
-                      />}
-              />
-            </div>
-
-            <div className={classes.playStatus}>
-              <div>
-                <IconButton color="inherit">
-                  {!this.state.mute ?
-                    (<VolumeUp onClick={this.muteVolume}/>) :
-                    (<VolumeOff onClick={this.resetVolume}/>)}
-                </IconButton>
-              </div>
-              <Slider value={this.state.volume} onChange={this.volumeChange}
-                      classes={{
-                        container: classes.slider,
-                        thumbIconWrapper: classes.thumbIconWrapper,
-                        trackBefore: classes.trackBefore,
-                        trackAfter: classes.trackAfter,
-                        root: classes.root,
-                      }}
-                      thumb={<LensIcon style={{color: '#2196f3'}}/>}
-
-              />
-              <div>
-              <IconButton color="inherit">
-              <Shuffle onClick={this.props.resetPlayQueue}/>
-              </IconButton>
-              </div>
-              <div>
-
-                <IconButton color="inherit" onClick={this.props.getPeekList}>
-                  <Link to="/peeklist" style={{textDecoration: 'none', color: 'white'}}>
-                    <QueueMusic/>
-                  </Link>
-                </IconButton>
-              </div>
-            </div>
+          </div>
         </Toolbar>
       </AppBar>
     )
