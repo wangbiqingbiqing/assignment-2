@@ -17,14 +17,13 @@ const styles = {
 class PlayListPanel extends Component {
   constructor(props) {
     super(props);
-    this.playPlaylist = this.playPlaylist.bind(this);
+    this.shufflePlaylist = this.shufflePlaylist.bind(this);
   }
 
-  playPlaylist() {
+  shufflePlaylist() {
     if (this.props.isLoggedIn) {
-      this.props.playPlaylist();
+      this.props.shufflePlaylist();
     }
-
   }
 
   render() {
@@ -44,7 +43,7 @@ class PlayListPanel extends Component {
               <div style={{float: 'right'}}>
                 <IconButton color="inherit">
                   <Link to="/peeklist" style={{textDecoration: 'none'}}>
-                    <Shuffle onClick={this.playPlaylist}/>
+                    <Shuffle onClick={this.shufflePlaylist}/>
                   </Link>
                 </IconButton>
               </div>

@@ -9,7 +9,7 @@ const PlayListPanelCon = connect(
   }),
   dispatch => ({
 
-    playPlaylist: () => dispatch(resetPlayList()),
+    shufflePlaylist: () => dispatch(resetPlayList()),
   })
 )(PlayListPanel)
 export default PlayListPanelCon

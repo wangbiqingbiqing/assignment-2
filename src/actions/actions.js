@@ -163,8 +163,6 @@ export function login() {
   return (dispatch) => {
     dispatch(setLogin());
     dispatch(getPlaylists());
-    // dispatch(getPlaylist());
-    // dispatch(resetPlayList());
   }
 }
 

@@ -58,12 +58,12 @@ export default function shufflePlayerData(state = defaultState, action) {
     case SET_LOG_OUT:
       return {
         currentSong: DEMO_AUDIO,
-        playList: [DEMO_AUDIO],
+        playList: [],
         isLoggedIn: false,
         peekList: [],
         playLists: DEFAULT_PLAYLISTS,
         isTurnedOn: false,
-        playingQueue: [],
+        playingQueue: [DEMO_AUDIO],
         peekNum: 5
       };
     case SET_PEEK_LIST:

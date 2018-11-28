@@ -2,7 +2,7 @@ import connect from "react-redux/es/connect/connect";
 import {withRouter} from "react-router";
 import {
   getPeekList,
-  playNextSong,
+  playNextSong, resetPlayList,
   turnOffPlayer,
   turnOnPlayer
 } from "../actions/actions";
@@ -19,6 +19,7 @@ const BottomBarCon = connect(
     handleSwitchOn: () => dispatch(turnOnPlayer()),
     handleSwitchOff: () => dispatch(turnOffPlayer()),
     getPeekList: () => dispatch(getPeekList()),
+    resetPlayQueue:()=>dispatch(resetPlayList()),
   })
 )(BottomBar);
 
