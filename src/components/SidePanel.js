@@ -17,7 +17,7 @@ class SidePanel extends Component {
     if (typeof(this.props.data) === 'object') {
       this.props.data.forEach(listName =>
         tableData.push(
-          <TableRow key={listName} onClick={this.props.openPlayList}>
+          <TableRow key={listName} hover onClick={this.props.openPlayList}>
             <Link to="/playlist" style={{textDecoration: 'none', color: 'white'}}>
               <TableCell>
                 {listName}
@@ -28,7 +28,7 @@ class SidePanel extends Component {
 
     return (
       <React.Fragment>
-        <div style={{height: '100%', minHeight: 700, borderRight: 'grey solid', marginTop: '64px'}}>
+        <div style={{height: '100%', minHeight: 750, borderRight: 'grey solid', marginTop: '64px'}}>
           <Typography align="center" variant="h5">
             PlayList
           </Typography>

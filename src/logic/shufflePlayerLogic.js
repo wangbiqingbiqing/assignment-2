@@ -1,6 +1,6 @@
-import {PLAYLIST_1} from "../constants/states";
+import { DEMO_AUDIO} from "../constants/states";
 
-export var dynamicList = PLAYLIST_1.slice();
+export var dynamicList = [DEMO_AUDIO].slice();
 
 /**
  * Shuffle the order of an given array by Fisher-Yates shuffle algorithm
