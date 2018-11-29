@@ -49,10 +49,10 @@ export function setSong(dynamicList, queue) {
     queue = queueAppended.slice();
     return queue;
   } else {
-    dynamicList.slice();
+    let currentRound = dynamicList.slice();
     do {
       shuffle(dynamicList);
-    } while (queue[queue.length - 1] === dynamicList[0] || queue[0] === dynamicList[0]);
+    } while (arraysEqual(currentRound,dynamicList)||queue[queue.length - 1] === dynamicList[0] || queue[0] === dynamicList[0]);
     queueAppended = queue.concat(dynamicList);
     return queueAppended;
   }
@@ -129,4 +129,21 @@ export function isSamePlaylist(listA, listB){
   listB.forEach(song=>listBIds.push(song.songId));
 
   return listA.length === listB.length && listA.sort().every(function(value, index) { return value === listB.sort()[index]});
+}
+
+/**
+ *  Check the equality of two given array.
+ *
+ * @param {array} arr1
+ * @param {array} arr2
+ * @return {boolean} Return true when two arrays equal, else false.
+ */
+function arraysEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length)
+    return false;
+  for (let i = arr1.length; i--;) {
+    if (arr1[i] !== arr2[i])
+      return false;
+  }
+  return true;
 }
