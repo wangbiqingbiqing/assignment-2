@@ -1,5 +1,13 @@
-import {PLAYLIST_1, PLAYLISTS} from "../constants/states";
-import {dynamicList, getNext, getPeekQueue, setSong, skipSong, startPlayingWithSong} from "../logic/shufflePlayerLogic";
+import { PLAYLISTS, SONGS_COLLECTION} from "../constants/states";
+import {
+  dynamicList,
+  getNext,
+  getPeekQueue,
+  setSong,
+  skipSong,
+  startPlayingWithSong,
+  setDynamicList, isSamePlaylist
+} from "../logic/shufflePlayerLogic";
 
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
 
@@ -71,7 +79,13 @@ export function resetPlayList() {
   return (dispatch, getState) => {
     const data = getState();
     let queue = data.playingQueue;
+    let playlist = data.playlist;
     queue.splice(1,queue.length-1);
+    console.log(playlist);
+    console.log(dynamicList);
+    if(!isSamePlaylist(playlist,dynamicList)){
+    setDynamicList(playlist);
+    }
     queue = setSong(dynamicList, queue);
     dispatch(setPlayingQueue(queue));
     dispatch(playNextSong());
@@ -113,7 +127,7 @@ export function skipSongAction(skippedIndex) {
   }
 }
 
-export function junmpToPlaySong(playingIndex) {
+export function jumpToPlaySong(playingIndex) {
   return (dispatch, getState) => {
     const data = getState();
     let queue = data.playingQueue;
@@ -137,9 +151,10 @@ export function getPlaylists() {
   };
 }
 
-export function getPlaylist() {
+export function getPlaylist(listName) {
   return (dispatch) => {
-    dispatch(setPlaylist(PLAYLIST_1));
+    let playlist = SONGS_COLLECTION[listName];
+    dispatch(setPlaylist(playlist));
   };
 }
 

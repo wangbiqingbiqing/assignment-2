@@ -38,7 +38,7 @@ class PlayListPanel extends Component {
               Playlist
             </Typography>
           </Grid>
-          {this.props.playList.length === 0 ? null :
+          {this.props.playlist.length === 0 ? null :
             <Grid item xs={10}>
               <div style={{float: 'right'}}>
                 <IconButton color="inherit">
@@ -50,11 +50,11 @@ class PlayListPanel extends Component {
             </Grid>
           }
           {
-            this.props.playList.length === 0 ?
+            this.props.playlist.length === 0 ?
               <div>Opps, no song in this playlist. You can shuffle other lists!</div> :
               <Grid item xs={10}>
                 <Paper>
-                  <SongListTable data={this.props.playList} isPeekList={false} displayNum={this.props.playList.length}/>
+                  <SongListTable data={this.props.playlist} isPeekList={false} displayNum={this.props.playlist.length}/>
                 </Paper>
               </Grid>
           }

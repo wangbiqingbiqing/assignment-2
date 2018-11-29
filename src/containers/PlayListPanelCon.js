@@ -5,11 +5,11 @@ import PlayListPanel from "../components/PlayListPanel";
 const PlayListPanelCon = connect(
   state => ({
     isLoggedIn: state.isLoggedIn,
-    playList: state.playList,
+    playlist: state.playlist,
   }),
   dispatch => ({
 
     shufflePlaylist: () => dispatch(resetPlayList()),
   })
-)(PlayListPanel)
+)(PlayListPanel);
 export default PlayListPanelCon

@@ -68,7 +68,6 @@ export function setSong(dynamicList, queue) {
  */
 export function getNext(queue) {
   if (queue.length === 1) {
-    // dynamicList= playList.slice();
     queue = setSong(dynamicList, queue);
   }
   queue.shift();
@@ -119,3 +118,15 @@ export function startPlayingWithSong(index, queue) {
   return queue;
 }
 
+export function setDynamicList(playlist){
+  dynamicList= playlist.slice();
+}
+
+export function isSamePlaylist(listA, listB){
+  let listAIds = [];
+  let listBIds = [];
+  listA.forEach(song=>listAIds.push(song.songId));
+  listB.forEach(song=>listBIds.push(song.songId));
+
+  return listA.length === listB.length && listA.sort().every(function(value, index) { return value === listB.sort()[index]});
+}

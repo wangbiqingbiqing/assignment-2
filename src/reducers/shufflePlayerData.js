@@ -13,7 +13,7 @@ import {
 import {DEFAULT_PLAYLISTS, DEMO_AUDIO} from "../constants/states";
 
 const defaultState = {
-  playList: [],
+  playlist: [],
   peekList: [],
   isTurnedOn: false,
   currentSong: DEMO_AUDIO,
@@ -48,7 +48,7 @@ export default function shufflePlayerData(state = defaultState, action) {
     case SET_PLAYLIST:
       return {
         ...state,
-        playList: action.playlist,
+        playlist: [...action.playlist],
       };
     case SET_LOG_IN:
       return {
@@ -58,7 +58,7 @@ export default function shufflePlayerData(state = defaultState, action) {
     case SET_LOG_OUT:
       return {
         currentSong: DEMO_AUDIO,
-        playList: [],
+        playlist: [],
         isLoggedIn: false,
         peekList: [],
         playLists: DEFAULT_PLAYLISTS,
