@@ -20,54 +20,9 @@ export const DEFAULT_PLAYLISTS = 'Login to shuffle your own playlist!';
  @type {array}
  This is the playlists user will see once log in
  */
-export const PLAYLISTS = ['playlist 1','playlist 2','playlist 3','playlist 4'];
+export const PLAYLISTS = ['playlist1', 'playlist2', 'playlist3', 'playlist4'];
 
-export const PLAYLIST_1 = [
-  {
-    songId: 1,
-    songName: 'song 1',
-    artist: 'artist 1',
-    album: 'album 1',
-    time: '4:03'
-  },
-  {
-    songId: 2,
-    songName: 'song 2',
-    artist: 'artist 2',
-    album: 'album 2',
-    time: '4:33'
-  },
-  {
-    songId: 3,
-    songName: 'song 3',
-    artist: 'artist 3',
-    album: 'album 3',
-    time: '5:03'
-  },
-  {
-    songId: 4,
-    songName: 'song 4',
-    artist: 'artist 4',
-    album: 'album 4',
-    time: '4:03'
-  },
-  {
-    songId: 5,
-    songName: 'song 5',
-    artist: 'artist 5',
-    album: 'album 5',
-    time: '4:23'
-  },
-  {
-    songId: 6,
-    songName: 'song 6',
-    artist: 'artist 6',
-    album: 'album 6',
-    time: '5:00'
-  }
-];
-
-export const SONGS_COLLECTION = [
+export const SONGS_COLLECTION =
   {
     playlist1: [
       {
@@ -112,9 +67,8 @@ export const SONGS_COLLECTION = [
         album: 'album 6',
         time: '5:00'
       }
-    ]
-  },
-  {
+    ],
+
     playlist2: [
       {
         songId: 1,
@@ -221,31 +175,28 @@ export const SONGS_COLLECTION = [
         album: 'album 5',
         time: '4:23'
       }
-    ]
-  },
-  {playlist3: [
-  {
-    songId: 1,
-    songName: 'song 1',
-    artist: 'artist 1',
-    album: 'album 1',
-    time: '4:03'
-  },
-  {
-    songId: 2,
-    songName: 'song 2',
-    artist: 'artist 2',
-    album: 'album 2',
-    time: '4:33'
-  },
-  {
-    songId: 3,
-    songName: 'song 3',
-    artist: 'artist 3',
-    album: 'album 3',
-    time: '5:03'
-  }]
-},
-  {playlist4: []
+    ],
+    playlist3: [
+      {
+        songId: 1,
+        songName: 'song 1',
+        artist: 'artist 1',
+        album: 'album 1',
+        time: '4:03'
+      },
+      {
+        songId: 2,
+        songName: 'song 2',
+        artist: 'artist 2',
+        album: 'album 2',
+        time: '4:33'
+      },
+      {
+        songId: 3,
+        songName: 'song 3',
+        artist: 'artist 3',
+        album: 'album 3',
+        time: '5:03'
+      }],
+    playlist4: []
   }
-];
