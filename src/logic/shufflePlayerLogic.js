@@ -98,6 +98,9 @@ export function getNext(queue) {
 
 //todo check when didn't choose playlist, should be no next songs on the queue
 export function getPeekQueue(queue, peekNum) {
+  if(dynamicList.length===0){
+    return {peekQueue: [], playingQueue: queue}
+  }
   while (peekNum >= queue.length) {
     queue = setSong(dynamicList, queue);
   }
