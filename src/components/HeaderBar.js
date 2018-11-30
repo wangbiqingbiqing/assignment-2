@@ -39,7 +39,7 @@ class HeaderBar extends Component {
                 </Link>
               </div> :
               <div>
-                <Link to="/playlist" style={{textDecoration: 'none', color: 'white'}}>
+                <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
                   <Button color="inherit" onClick={this.props.login}>LOGIN</Button>
                 </Link>
               </div>
