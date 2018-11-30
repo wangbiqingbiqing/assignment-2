@@ -9,7 +9,6 @@ import QueueMusic from '@material-ui/icons/QueueMusic'
 import SkipNext from '@material-ui/icons/SkipNext';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import VolumeUp from '@material-ui/icons/VolumeUp';
-import Shuffle from '@material-ui/icons/Shuffle';
 import Slider from "@material-ui/lab/es/Slider/Slider";
 import React, {Component} from 'react'
 import Link from "react-router-dom/es/Link";
@@ -181,15 +180,8 @@ class BottomBar extends Component {
                     thumb={<LensIcon style={{color: '#2196f3'}}/>}
 
             />
-            <div>
-              <IconButton color="inherit">
-                <Tooltip title="Reshuffle Queue" placement="left">
-                  <Shuffle onClick={this.props.resetPlayQueue}/>
-                </Tooltip>
-              </IconButton>
-            </div>
-            <div>
 
+            <div>
               <IconButton color="inherit" onClick={this.props.getPeekList}>
                 <Link to="/peeklist" style={{textDecoration: 'none', color: 'white'}}>
                   <Tooltip title="View Queue" placement="left">
