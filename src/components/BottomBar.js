@@ -139,9 +139,7 @@ class BottomBar extends Component {
                 <Pause onClick={this.props.handleSwitchOff}/>}
             </IconButton>
             <IconButton aria-label="Next" color="inherit">
-              <Link to="/peeklist" style={{textDecoration: 'none', color: 'white'}}>
                 <SkipNext onClick={this.playNext}/>
-              </Link>
             </IconButton>
           </div>
           <div className={classes.songInfo}>

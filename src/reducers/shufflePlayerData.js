@@ -8,12 +8,13 @@ import {
   SET_PLAYLIST,
   SET_PLAYLISTS,
   TURN_OFF_PLAYER,
-  TURN_ON_PLAYER
+  TURN_ON_PLAYER, SET_PLAYLEST_NAME
 } from "../actions/actions";
 import {DEFAULT_PLAYLISTS, DEMO_AUDIO} from "../constants/states";
 
 const defaultState = {
   playlist: [],
+  playlistName:'',
   peekList: [],
   isTurnedOn: false,
   currentSong: DEMO_AUDIO,
@@ -49,6 +50,11 @@ export default function shufflePlayerData(state = defaultState, action) {
       return {
         ...state,
         playlist: [...action.playlist],
+      };
+    case SET_PLAYLEST_NAME:
+      return{
+        ...state,
+        playlistName:action.listName,
       };
     case SET_LOG_IN:
       return {

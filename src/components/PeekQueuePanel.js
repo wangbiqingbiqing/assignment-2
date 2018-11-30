@@ -1,16 +1,19 @@
-import Grid from "@material-ui/core/es/Grid/Grid";
-import Paper from "@material-ui/core/es/Paper/Paper";
-import Table from "@material-ui/core/es/Table/Table";
-import TableBody from "@material-ui/core/es/TableBody/TableBody";
-import TableCell from "@material-ui/core/es/TableCell/TableCell";
-import TableHead from "@material-ui/core/es/TableHead/TableHead";
-import TableRow from "@material-ui/core/es/TableRow/TableRow";
-import TextField from "@material-ui/core/es/TextField/TextField";
-import Typography from "@material-ui/core/es/Typography/Typography";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Grid from "@material-ui/core/Grid/Grid";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import Paper from "@material-ui/core/Paper/Paper";
+import Table from "@material-ui/core/Table/Table";
+import TableBody from "@material-ui/core/TableBody/TableBody";
+import TableCell from "@material-ui/core/TableCell/TableCell";
+import TableHead from "@material-ui/core/TableHead/TableHead";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import TextField from "@material-ui/core/TextField/TextField";
+import Typography from "@material-ui/core/Typography/Typography";
 import {withStyles} from "@material-ui/core/styles/index";
 import React, {Component} from 'react';
 import {SONG_KEY} from "../constants/keys";
 import ListTable from "./ListTable";
+import Shuffle from '@material-ui/icons/Shuffle';
 
 const styles = {
   panelPosition: {
@@ -35,6 +38,13 @@ class PeekQueuePanel extends Component {
   render() {
     const {classes} = this.props;
     const peekNum = this.props.peekNum;
+    let message ='';
+    if(!this.props.playlistName){
+      message='Please select a playlist before shuffle play';
+    }
+    if(!this.props.isLoggedIn){
+      message='Please log in before shuffle play';
+    }
     return (
       <React.Fragment>
         <div className={classes.panelPosition}>
@@ -43,6 +53,12 @@ class PeekQueuePanel extends Component {
             <Grid item xs={10}>
               <Typography variant="h5" gutterBottom>
                 Play Queue
+                {this.props.peekList.length === 0?null:
+                  <IconButton color="inherit">
+                  <Tooltip title="Reshuffle the playing queue" placement="right">
+                    <Shuffle onClick={this.props.reshufflePlaylist}/>
+                  </Tooltip>
+                </IconButton>}
               </Typography>
             </Grid>
             <Grid item xs={10}>
@@ -94,7 +110,9 @@ class PeekQueuePanel extends Component {
                     </div>
                   </div>
                 </Grid>
-                {this.props.peekList.length !== 0 && this.props.isLoggedIn && <Grid item xs={12}>
+                <div><Typography  gutterBottom>{message}</Typography></div>
+                {this.props.peekList.length !== 0 &&
+                <Grid item xs={12}>
                   <Paper>
                     <ListTable data={this.props.peekList} isPeekList={true}
                                skipSong={(queueIndex) => this.props.skipSong(queueIndex)}

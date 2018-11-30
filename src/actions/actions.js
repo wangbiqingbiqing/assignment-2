@@ -40,6 +40,16 @@ export function setPlaylist(playlist) {
   }
 }
 
+export const SET_PLAYLEST_NAME = 'SET_PLAYLEST_NAME';
+
+export function setPlylistName(listName){
+  return{
+    type:SET_PLAYLEST_NAME,
+    listName,
+  }
+}
+
+
 export const SET_PLAYLISTS = 'SET_PLAYLISTS';
 
 export function setPlaylists(playlists) {
@@ -155,6 +165,7 @@ export function getPlaylists() {
 export function getPlaylist(listName) {
   return (dispatch) => {
     let playlist = SONGS_COLLECTION[listName];
+    dispatch(setPlylistName(listName));
     dispatch(setPlaylist(playlist));
   };
 }

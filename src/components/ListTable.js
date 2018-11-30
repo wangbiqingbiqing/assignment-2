@@ -25,12 +25,12 @@ class ListTable extends Component {
         <TableCell key={j}>{j}</TableCell>
         {tableRow}{this.props.isPeekList ? <TableCell>
         <IconButton variant="outlined" size="small" color="inherit">
-          <Tooltip title="skip this song" placement="left">
+          <Tooltip title="Skip this song" placement="left">
             <Redo onClick={() => this.props.skipSong(j)}/>
           </Tooltip>
         </IconButton>
         <IconButton variant="outlined" size="small" color="inherit">
-          <Tooltip title="play this song" placement="right">
+          <Tooltip title="Start with this song" placement="right">
             <PlayArrow onClick={() => this.props.jumpToPlay(j)}/>
           </Tooltip>
         </IconButton>

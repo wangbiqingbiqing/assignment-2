@@ -1,3 +1,5 @@
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import Grid from "@material-ui/core/Grid/Grid";
 import React, {Component} from 'react';
 import {Route, Switch} from "react-router-dom";
@@ -9,9 +11,16 @@ import PeekQueuePanelCon from "./containers/PeekQueuePanelCon";
 import PlayListPanelCon from "./containers/PlayListPanelCon";
 import SidePanelCon from "./containers/SidePanelCon";
 
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+});
+
 class App extends Component {
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Grid container>
         <Grid item xs={12}>
           <HeaderBarCon/>
@@ -33,6 +42,7 @@ class App extends Component {
           <BottomBarCon/>
         </Grid>
       </Grid>
+      </MuiThemeProvider>
     );
   }
 }

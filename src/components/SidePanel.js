@@ -7,13 +7,12 @@ import Typography from "@material-ui/core/Typography/Typography";
 import React, {Component} from 'react';
 import Link from "react-router-dom/es/Link";
 
-
 const styles = {
   panelPosition: {
-    position:'absolute',
-    top:'68px',
-    bottom:'68px',
-    width:'17%',
+    position: 'absolute',
+    top: '68px',
+    bottom: '68px',
+    width: '17%',
     borderRight: 'grey solid'
   },
   margin: {
@@ -29,17 +28,22 @@ class SidePanel extends Component {
   render() {
     const {classes} = this.props;
     let tableData = [];
+    let i = 0;
     if (typeof(this.props.data) === 'object') {
-      this.props.data.forEach(listName =>
-        tableData.push(
-          <TableRow key={listName} id={listName} hover
-                    onClick={(event) => this.props.openPlayList(event.currentTarget.id)}>
-            <Link to="/playlist" style={{textDecoration: 'none', color: 'white'}}>
-              <TableCell>
-                {listName}
+      this.props.data.forEach(listName => {
+          tableData.push(
+            <TableRow hover key={i}>
+              <TableCell key={listName} id={listName}
+                         onClick={(event) => this.props.openPlayList(event.currentTarget.id)}
+                         style={{textAlign:'center'}}>
+                <Link to="/playlist" style={{textDecoration: 'none', color: 'black'}}>
+                  {listName}
+                </Link>
               </TableCell>
-            </Link>
-          </TableRow>))
+            </TableRow>);
+          i++;
+        }
+      )
     }
 
     return (
@@ -48,6 +52,7 @@ class SidePanel extends Component {
           <Typography align="center" variant="h5" className={classes.margin}>
             PlayList
           </Typography>
+          <div style={{marginTop:'30px',textAlign:'center'}}>
           {typeof(this.props.data) === 'string' ? this.props.data : null}
           {tableData.length !== 0 &&
           <Table>
@@ -55,6 +60,7 @@ class SidePanel extends Component {
               {tableData}
             </TableBody>
           </Table>}
+          </div>
         </div>
       </React.Fragment>
     )

@@ -6,9 +6,9 @@ const PlayListPanelCon = connect(
   state => ({
     isLoggedIn: state.isLoggedIn,
     playlist: state.playlist,
+    playlistName:state.playlistName,
   }),
   dispatch => ({
-
     shufflePlaylist: () => dispatch(resetPlayList()),
   })
 )(PlayListPanel);
