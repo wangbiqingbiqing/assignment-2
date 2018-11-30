@@ -1,4 +1,4 @@
-import {PLAYLISTS, SONGS_COLLECTION} from "../constants/states";
+import {SONGS_COLLECTION} from "../constants/states";
 import {
   dynamicList,
   getNext,
@@ -158,7 +158,7 @@ export function changePeekNum(peekNum) {
 
 export function getPlaylists() {
   return (dispatch) => {
-    dispatch(setPlaylists(PLAYLISTS));
+    dispatch(setPlaylists(Object.keys(SONGS_COLLECTION)));
   };
 }
 

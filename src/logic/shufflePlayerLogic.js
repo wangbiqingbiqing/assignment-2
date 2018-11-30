@@ -42,11 +42,12 @@ export function setSong(dynamicList, queue, resetFlag = false) {
     queue.push(dynamicList[0]);
     return queue;
   } else if (dynamicList.length === 2) {
+    //TODO for two songs reshuffle check
     const first = dynamicList[0];
-    dynamicList.shift();
+      dynamicList.shift();
     dynamicList.push(first);
-    queueAppended = queue.concat(dynamicList);
-    queue = queueAppended.slice();
+      queueAppended = queue.concat(dynamicList);
+      queue = queueAppended.slice();
     return queue;
   } else {
     let currentRound = dynamicList.slice();
@@ -96,7 +97,6 @@ export function getNext(queue) {
  * @return {object} A object with the peekQueue and playingQueue list.
  */
 
-//todo check when didn't choose playlist, should be no next songs on the queue
 export function getPeekQueue(queue, peekNum) {
   if(dynamicList.length===0){
     return {peekQueue: [], playingQueue: queue}

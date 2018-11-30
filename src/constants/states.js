@@ -17,11 +17,9 @@ export const DEMO_AUDIO = {
 export const DEFAULT_PLAYLISTS = 'Login to shuffle your own playlist!';
 
 /** @constant
- @type {array}
- This is the playlists user will see once log in
+ @type {object}
+ This is the song collection with key as playlist name and value as corresponding playlist's songs
  */
-export const PLAYLISTS = ['playlist1', 'playlist2', 'playlist3', 'playlist4'];
-
 export const SONGS_COLLECTION =
   {
     playlist1: [
@@ -198,5 +196,26 @@ export const SONGS_COLLECTION =
         album: 'album 3',
         time: '5:03'
       }],
-    playlist4: []
+    playlist4: [],
+    playlist5: [{
+      songId: 2,
+      songName: 'song 2',
+      artist: 'artist 2',
+      album: 'album 2',
+      time: '4:33'
+    }],
+    playlist6: [{
+      songId: 2,
+      songName: 'song 2',
+      artist: 'artist 2',
+      album: 'album 2',
+      time: '4:33'
+    },
+      {
+        songId: 3,
+        songName: 'song 3',
+        artist: 'artist 3',
+        album: 'album 3',
+        time: '5:03'
+      }]
   };
