@@ -47,6 +47,7 @@ class ListTable extends Component {
             <TableCell>{SONG_KEY.ARTIST}</TableCell>
             <TableCell>{SONG_KEY.ALBUM}</TableCell>
             <TableCell>{SONG_KEY.TIME}</TableCell>
+            {this.props.isPeekList ?<TableCell></TableCell>:null}
           </TableRow>
         </TableHead>
         <TableBody>

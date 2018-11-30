@@ -2,9 +2,24 @@ import Table from "@material-ui/core/es/Table/Table";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import TableCell from "@material-ui/core/es/TableCell/TableCell";
 import TableRow from "@material-ui/core/es/TableRow/TableRow";
+import {withStyles} from "@material-ui/core/styles/index";
 import Typography from "@material-ui/core/Typography/Typography";
 import React, {Component} from 'react';
 import Link from "react-router-dom/es/Link";
+
+
+const styles = {
+  panelPosition: {
+    position:'absolute',
+    top:'68px',
+    bottom:'68px',
+    width:'17%',
+    borderRight: 'grey solid'
+  },
+  margin: {
+    marginTop: '50px'
+  }
+};
 
 /**
  * This is a left side panel displaying different playlist name.
@@ -12,7 +27,7 @@ import Link from "react-router-dom/es/Link";
  */
 class SidePanel extends Component {
   render() {
-
+    const {classes} = this.props;
     let tableData = [];
     if (typeof(this.props.data) === 'object') {
       this.props.data.forEach(listName =>
@@ -29,8 +44,8 @@ class SidePanel extends Component {
 
     return (
       <React.Fragment>
-        <div style={{height: '100%', minHeight: 750, borderRight: 'grey solid', marginTop: '64px'}}>
-          <Typography align="center" variant="h5">
+        <div className={classes.panelPosition}>
+          <Typography align="center" variant="h5" className={classes.margin}>
             PlayList
           </Typography>
           {typeof(this.props.data) === 'string' ? this.props.data : null}
@@ -46,4 +61,4 @@ class SidePanel extends Component {
   }
 }
 
-export default (SidePanel)
+export default withStyles(styles)(SidePanel)

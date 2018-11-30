@@ -13,9 +13,15 @@ import {SONG_KEY} from "../constants/keys";
 import ListTable from "./ListTable";
 
 const styles = {
+  panelPosition: {
+    position:'absolute',
+    top:'68px',
+    bottom:'68px',
+    width:'83%',
+    overflowY: 'auto'
+  },
   margin: {
-    marginTop: '64px',
-    height: '100%',
+    marginTop: '50px'
   },
   textField: {
     marginTop: '0px',
@@ -31,9 +37,9 @@ class PeekQueuePanel extends Component {
     const peekNum = this.props.peekNum;
     return (
       <React.Fragment>
-        <div className={classes.margin}>
+        <div className={classes.panelPosition}>
           <Grid container spacing={8} justify="center"
-                alignItems="center">
+                alignItems="center" className={classes.margin}>
             <Grid item xs={10}>
               <Typography variant="h5" gutterBottom>
                 Play Queue

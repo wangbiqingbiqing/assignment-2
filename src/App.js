@@ -26,9 +26,6 @@ class App extends Component {
               <Route exact path={'/playlist'} component={PlayListPanelCon}/>
               <Route exact path={'/peeklist'} component={PeekQueuePanelCon}/>
               <Route exact path={'/'} component={InfoPageCon}/>
-              {/*<Route exact path={'/'}*/}
-              {/*render={() => <WelcomePage text={'Log in to shuffle your playlist!'}/>}*/}
-              {/*/>*/}
             </Switch>
           </Grid>
         </Grid>

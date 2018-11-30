@@ -9,8 +9,15 @@ import SongListTable from "./ListTable";
 import Shuffle from '@material-ui/icons/Shuffle';
 
 const styles = {
+  panelPosition: {
+    position:'absolute',
+    top:'68px',
+    bottom:'68px',
+    width:'83%',
+    overflowY: 'auto'
+  },
   margin: {
-    marginTop: '5%'
+    marginTop: '50px'
   }
 };
 
@@ -31,7 +38,8 @@ class PlayListPanel extends Component {
 
     return (
       <React.Fragment>
-        <Grid container spacing={8} justify="center"
+        <div className={classes.panelPosition}>
+        <Grid container spacing={12} justify="center"
               alignItems="center" className={classes.margin}>
           <Grid item xs={10}>
             <Typography variant="h5" gutterBottom>
@@ -59,6 +67,7 @@ class PlayListPanel extends Component {
               </Grid>
           }
         </Grid>
+        </div>
       </React.Fragment>
     );
 
