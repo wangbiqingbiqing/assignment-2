@@ -34,7 +34,7 @@ function shuffle(array) {
  * @param {boolean} resetFlag - A boolean to differentiate resetSong and setSong logic
  * @return {array} The same queue with the songs appended in different shuffled order.
  */
-export function setSong(dynamicList, queue, resetFlag=false) {
+export function setSong(dynamicList, queue, resetFlag = false) {
   let queueAppended;
   if (dynamicList.length === 0) {
     return queue;
@@ -50,14 +50,14 @@ export function setSong(dynamicList, queue, resetFlag=false) {
     return queue;
   } else {
     let currentRound = dynamicList.slice();
-    if(resetFlag){
+    if (resetFlag) {
       do {
         shuffle(dynamicList);
-      } while (arraysEqual(currentRound,dynamicList)|| queue[0] === dynamicList[0]);
-    }else{
+      } while (arraysEqual(currentRound, dynamicList) || queue[0] === dynamicList[0]);
+    } else {
       do {
         shuffle(dynamicList);
-      } while (arraysEqual(currentRound,dynamicList)||queue[queue.length - 1] === dynamicList[0]);
+      } while (arraysEqual(currentRound, dynamicList) || queue[queue.length - 1] === dynamicList[0]);
     }
     queueAppended = queue.concat(dynamicList);
     return queueAppended;
@@ -75,8 +75,8 @@ export function setSong(dynamicList, queue, resetFlag=false) {
 export function getNext(queue) {
   if (queue.length === 1) {
     //The case when no song on the playlist and queue only contains current playing song, then getNext repeat the current song
-    if(dynamicList.length===0){
-      return {nextSong: queue[0],playingQueue:queue};
+    if (dynamicList.length === 0) {
+      return {nextSong: queue[0], playingQueue: queue};
     }
     queue = setSong(dynamicList, queue);
   }
@@ -95,6 +95,8 @@ export function getNext(queue) {
  * @param {number} peekNum - A number which user wants to peek on the queue from the current song.
  * @return {object} A object with the peekQueue and playingQueue list.
  */
+
+//todo check when didn't choose playlist, should be no next songs on the queue
 export function getPeekQueue(queue, peekNum) {
   while (peekNum >= queue.length) {
     queue = setSong(dynamicList, queue);
@@ -128,17 +130,19 @@ export function startPlayingWithSong(index, queue) {
   return queue;
 }
 
-export function setDynamicList(playlist){
-  dynamicList= playlist.slice();
+export function setDynamicList(playlist) {
+  dynamicList = playlist.slice();
 }
 
-export function isSamePlaylist(listA, listB){
+export function isSamePlaylist(listA, listB) {
   let listAIds = [];
   let listBIds = [];
-  listA.forEach(song=>listAIds.push(song.songId));
-  listB.forEach(song=>listBIds.push(song.songId));
+  listA.forEach(song => listAIds.push(song.songId));
+  listB.forEach(song => listBIds.push(song.songId));
 
-  return listAIds.length === listBIds.length && listAIds.sort().every(function(value, index) { return value === listBIds.sort()[index]});
+  return listAIds.length === listBIds.length && listAIds.sort().every(function (value, index) {
+    return value === listBIds.sort()[index]
+  });
 }
 
 /**

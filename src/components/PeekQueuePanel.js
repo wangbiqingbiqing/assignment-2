@@ -12,7 +12,7 @@ import React, {Component} from 'react';
 import {SONG_KEY} from "../constants/keys";
 import ListTable from "./ListTable";
 
-const styles = theme => ({
+const styles = {
   margin: {
     marginTop: '64px',
     height: '100%',
@@ -22,7 +22,7 @@ const styles = theme => ({
     marginBottom: '0px',
     marginLeft: '10px'
   }
-})
+};
 
 class PeekQueuePanel extends Component {
 
