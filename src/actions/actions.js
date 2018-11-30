@@ -1,12 +1,13 @@
-import { PLAYLISTS, SONGS_COLLECTION} from "../constants/states";
+import {PLAYLISTS, SONGS_COLLECTION} from "../constants/states";
 import {
   dynamicList,
   getNext,
   getPeekQueue,
+  isSamePlaylist,
+  setDynamicList,
   setSong,
   skipSong,
-  startPlayingWithSong,
-  setDynamicList, isSamePlaylist
+  startPlayingWithSong
 } from "../logic/shufflePlayerLogic";
 
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
@@ -80,13 +81,13 @@ export function resetPlayList() {
     const data = getState();
     let queue = data.playingQueue;
     let playlist = data.playlist;
-    queue.splice(1,queue.length-1);
-    console.log(playlist);
-    console.log(dynamicList);
-    if(!isSamePlaylist(playlist,dynamicList)){
-    setDynamicList(playlist);
+    if (playlist.length !== 0) {
+      if (!isSamePlaylist(playlist, dynamicList)) {
+        setDynamicList(playlist);
+      }
     }
-    queue = setSong(dynamicList, queue);
+    queue.splice(1, queue.length - 1);
+    queue = setSong(dynamicList, queue, true);
     dispatch(setPlayingQueue(queue));
     dispatch(playNextSong());
   }

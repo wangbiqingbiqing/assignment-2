@@ -1,6 +1,4 @@
-import { DEMO_AUDIO} from "../constants/states";
-
-export var dynamicList = [DEMO_AUDIO].slice();
+export var dynamicList = [];
 
 /**
  * Shuffle the order of an given array by Fisher-Yates shuffle algorithm
@@ -27,14 +25,16 @@ function shuffle(array) {
  * When there is 1 song, directly append to queue
  * When there is 2 songs, change the order to differentiate from last round and append to queue
  * When there is more than 2 songs, shuffle the order to guarantee it's different from last round,
- * the first song in the next round is not same as the last song in current round, either the current playing song return the updated queue with next round appended
- *
+ * if it's reset song operation, the first song of the new round won't be same as current playing song;
+ * if it's set song operation, the first song of the next round is not same as the last song of current round,
+ * append new round list on the queue and return updated queue
  *
  * @param {array} dynamicList - A array of songs in a playlist
  * @param {array} queue - A queue of the playing songs
+ * @param {boolean} resetFlag - A boolean to differentiate resetSong and setSong logic
  * @return {array} The same queue with the songs appended in different shuffled order.
  */
-export function setSong(dynamicList, queue) {
+export function setSong(dynamicList, queue, resetFlag=false) {
   let queueAppended;
   if (dynamicList.length === 0) {
     return queue;
@@ -50,9 +50,15 @@ export function setSong(dynamicList, queue) {
     return queue;
   } else {
     let currentRound = dynamicList.slice();
-    do {
-      shuffle(dynamicList);
-    } while (arraysEqual(currentRound,dynamicList)||queue[queue.length - 1] === dynamicList[0] || queue[0] === dynamicList[0]);
+    if(resetFlag){
+      do {
+        shuffle(dynamicList);
+      } while (arraysEqual(currentRound,dynamicList)|| queue[0] === dynamicList[0]);
+    }else{
+      do {
+        shuffle(dynamicList);
+      } while (arraysEqual(currentRound,dynamicList)||queue[queue.length - 1] === dynamicList[0]);
+    }
     queueAppended = queue.concat(dynamicList);
     return queueAppended;
   }
@@ -68,6 +74,10 @@ export function setSong(dynamicList, queue) {
  */
 export function getNext(queue) {
   if (queue.length === 1) {
+    //The case when no song on the playlist and queue only contains current playing song, then getNext repeat the current song
+    if(dynamicList.length===0){
+      return {nextSong: queue[0],playingQueue:queue};
+    }
     queue = setSong(dynamicList, queue);
   }
   queue.shift();
@@ -128,7 +138,7 @@ export function isSamePlaylist(listA, listB){
   listA.forEach(song=>listAIds.push(song.songId));
   listB.forEach(song=>listBIds.push(song.songId));
 
-  return listA.length === listB.length && listA.sort().every(function(value, index) { return value === listB.sort()[index]});
+  return listAIds.length === listBIds.length && listAIds.sort().every(function(value, index) { return value === listBIds.sort()[index]});
 }
 
 /**

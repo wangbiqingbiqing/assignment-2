@@ -19,9 +19,7 @@ class ListTable extends Component {
     for (let j = 1; j <= displayNum; j++) {
       let song = listData[j - 1];
       let tableRow = Object.entries(song).map(([key, value]) => {
-        if (key !== SONG_KEY.SONG_ID) {
-          return (<TableCell key={value}>{value}</TableCell>)
-        }
+          return (key !== SONG_KEY.SONG_ID?<TableCell key={value}>{value}</TableCell>:null)
       });
       tableBody.push(<TableRow key={j}>
         <TableCell key={j}>{j}</TableCell>
