@@ -42,23 +42,24 @@ export function setSong(dynamicList, queue, resetFlag = false) {
     queue.push(dynamicList[0]);
     return queue;
   } else if (dynamicList.length === 2) {
-    //TODO for two songs reshuffle check
-    const first = dynamicList[0];
+    if ((resetFlag && queue[0].songId === dynamicList[0].songId) || !resetFlag) {
+      const first = dynamicList[0];
       dynamicList.shift();
-    dynamicList.push(first);
-      queueAppended = queue.concat(dynamicList);
-      queue = queueAppended.slice();
+      dynamicList.push(first);
+    }
+    queueAppended = queue.concat(dynamicList);
+    queue = queueAppended.slice();
     return queue;
   } else {
     let currentRound = dynamicList.slice();
     if (resetFlag) {
       do {
         shuffle(dynamicList);
-      } while (arraysEqual(currentRound, dynamicList) || queue[0] === dynamicList[0]);
+      } while (arraysEqual(currentRound, dynamicList) || queue[0].songId === dynamicList[0].songId);
     } else {
       do {
         shuffle(dynamicList);
-      } while (arraysEqual(currentRound, dynamicList) || queue[queue.length - 1] === dynamicList[0]);
+      } while (arraysEqual(currentRound, dynamicList) || queue[queue.length - 1].songId === dynamicList[0].songId);
     }
     queueAppended = queue.concat(dynamicList);
     return queueAppended;
@@ -75,7 +76,7 @@ export function setSong(dynamicList, queue, resetFlag = false) {
  */
 export function getNext(queue) {
   if (queue.length === 1) {
-    //The case when no song on the playlist and queue only contains current playing song, then getNext repeat the current song
+    //The initial case when no song on the playlist and queue only contains default audio, then getNext repeat the current song until user shuffles a valid playlist
     if (dynamicList.length === 0) {
       return {nextSong: queue[0], playingQueue: queue};
     }
@@ -98,7 +99,7 @@ export function getNext(queue) {
  */
 
 export function getPeekQueue(queue, peekNum) {
-  if(dynamicList.length===0){
+  if (dynamicList.length === 0) {
     return {peekQueue: [], playingQueue: queue}
   }
   while (peekNum >= queue.length) {
@@ -159,7 +160,7 @@ function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length)
     return false;
   for (let i = arr1.length; i--;) {
-    if (arr1[i] !== arr2[i])
+    if (arr1[i].songId !== arr2[i].songId)
       return false;
   }
   return true;
