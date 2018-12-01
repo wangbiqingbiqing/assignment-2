@@ -1,9 +1,9 @@
 import {SONGS_COLLECTION} from "../constants/states";
 import {
+  arraysWithSameElement,
   dynamicList,
   getNext,
   getPeekQueue,
-  arraysWithSameElement,
   setDynamicList,
   setSong,
   skipSong,
@@ -19,18 +19,6 @@ export function setCurrent(song) {
   }
 }
 
-export const TURN_ON_PLAYER = "TURN_ON_PLAYER";
-
-export function turnOnPlayer() {
-  return {type: TURN_ON_PLAYER}
-}
-
-export const TURN_OFF_PLAYER = "TURN_OFF_PLAYER";
-
-export function turnOffPlayer() {
-  return {type: TURN_OFF_PLAYER}
-}
-
 export const SET_PLAYLIST = 'SET_PLAYLIST';
 
 export function setPlaylist(playlist) {
@@ -40,15 +28,14 @@ export function setPlaylist(playlist) {
   }
 }
 
-export const SET_PLAYLEST_NAME = 'SET_PLAYLEST_NAME';
+export const SET_PLAYLIST_NAME = 'SET_PLAYLIST_NAME';
 
-export function setPlylistName(listName){
-  return{
-    type:SET_PLAYLEST_NAME,
+export function setPlylistName(listName) {
+  return {
+    type: SET_PLAYLIST_NAME,
     listName,
   }
 }
-
 
 export const SET_PLAYLISTS = 'SET_PLAYLISTS';
 
@@ -86,6 +73,29 @@ export function setPeekNum(peekNum) {
   }
 }
 
+export const SET_LOG_IN = 'SET_LOG_IN';
+
+export function setLogin() {
+  return {
+    type: SET_LOG_IN
+  }
+}
+
+export const SET_LOG_OUT = 'SET_LOG_OUT';
+
+export function setLogout() {
+  return {
+    type: SET_LOG_OUT
+  }
+}
+
+/**
+ * reset playlist playing order when users change a playlist or reshuffle current playing order
+ *
+ * when users change a playlist, set the temporary dynamicList with the selected playlist content and shuffle the playlist
+ * generate new playing queue and playing the next song, the first song of new round, on the playing queue list
+ * update playing queue's state
+ */
 export function resetPlayList() {
   return (dispatch, getState) => {
     const data = getState();
@@ -103,6 +113,10 @@ export function resetPlayList() {
   }
 }
 
+/**
+ * play next song on the playing queue
+ * get next song and set to current playing, updated state of playing queue and peek list
+ */
 export function playNextSong() {
   return (dispatch, getState) => {
     const data = getState();
@@ -110,13 +124,14 @@ export function playNextSong() {
     const result = getNext(queue);
     dispatch(setCurrent(result.nextSong));
     dispatch(setPlayingQueue(result.playingQueue));
-    if (!data.isTurnedOn) {
-      dispatch(turnOnPlayer());
-    }
     dispatch(getPeekList());
   }
 }
 
+/**
+ * get peek list
+ * according to peek number and get songs from playing queue, update state of peek list and playing queue
+ */
 export function getPeekList() {
   return (dispatch, getState) => {
     const data = getState();
@@ -128,6 +143,11 @@ export function getPeekList() {
   }
 }
 
+/**
+ * skip song
+ * skip the selecting song on the playing queue
+ * update state of playing queue and peek list
+ */
 export function skipSongAction(skippedIndex) {
   return (dispatch, getState) => {
     const data = getState();
@@ -138,6 +158,12 @@ export function skipSongAction(skippedIndex) {
   }
 }
 
+/**
+ * jump to selected song and start playing
+ * set selected song as the current playing song and update state
+ * update playing queue's state with selected song as start and following songs as previous order
+ * update peek list's state
+ */
 export function jumpToPlaySong(playingIndex) {
   return (dispatch, getState) => {
     const data = getState();
@@ -149,6 +175,10 @@ export function jumpToPlaySong(playingIndex) {
   }
 }
 
+/**
+ * change peek number
+ * update peek number's state with updated peek list state
+ */
 export function changePeekNum(peekNum) {
   return (dispatch) => {
     dispatch(setPeekNum(peekNum));
@@ -156,12 +186,18 @@ export function changePeekNum(peekNum) {
   }
 }
 
+/**
+ * get playlists' name from collection and update state
+ */
 export function getPlaylists() {
   return (dispatch) => {
     dispatch(setPlaylists(Object.keys(SONGS_COLLECTION)));
   };
 }
 
+/**
+ * get playlist according to name and update state
+ */
 export function getPlaylist(listName) {
   return (dispatch) => {
     let playlist = SONGS_COLLECTION[listName];
@@ -170,22 +206,9 @@ export function getPlaylist(listName) {
   };
 }
 
-export const SET_LOG_IN = 'SET_LOG_IN';
-
-export function setLogin() {
-  return {
-    type: SET_LOG_IN
-  }
-}
-
-export const SET_LOG_OUT = 'SET_LOG_OUT';
-
-export function setLogout() {
-  return {
-    type: SET_LOG_OUT
-  }
-}
-
+/**
+ * login and get playlists' name, update state
+ */
 export function login() {
   return (dispatch) => {
     dispatch(setLogin());
@@ -193,6 +216,9 @@ export function login() {
   }
 }
 
+/**
+ * logout and set to default state
+ */
 export function logout() {
   return (dispatch) => {
     dispatch(setLogout());
