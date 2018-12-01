@@ -3,7 +3,7 @@ import {
   dynamicList,
   getNext,
   getPeekQueue,
-  isSamePlaylist,
+  arraysWithSameElement,
   setDynamicList,
   setSong,
   skipSong,
@@ -92,7 +92,7 @@ export function resetPlayList() {
     let queue = data.playingQueue;
     let playlist = data.playlist;
     if (playlist.length !== 0) {
-      if (!isSamePlaylist(playlist, dynamicList)) {
+      if (!arraysWithSameElement(playlist, dynamicList)) {
         setDynamicList(playlist);
       }
     }

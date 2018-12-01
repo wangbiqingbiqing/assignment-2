@@ -1,3 +1,4 @@
+// an array to save temporary shuffled order of the selected playlist
 export var dynamicList = [];
 
 /**
@@ -19,23 +20,23 @@ function shuffle(array) {
 
 /**
  * Set shuffled songs into given queue and return the updated queue.
- * The songs are in the shuffled order which is different from previous round.
+ * The songs are shuffled in a order which is different from previous round.
  *
  * When there is 0 song, return queue as it is
  * When there is 1 song, directly append to queue
  * When there is 2 songs, change the order to differentiate from last round and append to queue
- * When there is more than 2 songs, shuffle the order to guarantee it's different from last round,
- * if it's reset song operation, the first song of the new round won't be same as current playing song;
- * if it's set song operation, the first song of the next round is not same as the last song of current round,
+ * if it's reset operation, arrange playlist to guarantee the first song of the new round is different from the current playing song
+ * When there is more than 2 songs, shuffle the playlist to guarantee its order is different from last round,
+ * if it's reset song operation, the first song of the new round is different from the current playing song;
+ * if it's set song operation, the first song of the next round is different from the last song of current round,
  * append new round list on the queue and return updated queue
  *
  * @param {array} dynamicList - A array of songs in a playlist
  * @param {array} queue - A queue of the playing songs
- * @param {boolean} resetFlag - A boolean to differentiate resetSong and setSong logic
- * @return {array} The same queue with the songs appended in different shuffled order.
+ * @param {boolean} resetFlag - A boolean to differentiate resetSong and setSong logic. ResetFlag marks as true when users change a playlist or users click reshuffle current playlist
+ * @return {array} An updated queue with the next playing round appended in different shuffled order.
  */
 export function setSong(dynamicList, queue, resetFlag = false) {
-  let queueAppended;
   if (dynamicList.length === 0) {
     return queue;
   } else if (dynamicList.length === 1) {
@@ -47,9 +48,7 @@ export function setSong(dynamicList, queue, resetFlag = false) {
       dynamicList.shift();
       dynamicList.push(first);
     }
-    queueAppended = queue.concat(dynamicList);
-    queue = queueAppended.slice();
-    return queue;
+    return queue.concat(dynamicList);
   } else {
     let currentRound = dynamicList.slice();
     if (resetFlag) {
@@ -61,8 +60,7 @@ export function setSong(dynamicList, queue, resetFlag = false) {
         shuffle(dynamicList);
       } while (arraysEqual(currentRound, dynamicList) || queue[queue.length - 1].songId === dynamicList[0].songId);
     }
-    queueAppended = queue.concat(dynamicList);
-    return queueAppended;
+    return queue.concat(dynamicList);
   }
 }
 
@@ -88,13 +86,13 @@ export function getNext(queue) {
 
 /**
  *  Return the number of peekNum songs going to play on the queue.
- *  This method does not change the existing playing queue's order but returns a new array of peekNum songs with same order.
+ *  This method does not change the existing playing queue's order but returns a new array of peekNum songs following the current order.
  *
  *  When peekNum is larger than the number of the rest song on playing queue, set playing queue,
- *  until the playing queue has enough rest songs for peek
+ *  until the playing queue has enough songs for peek
  *
  * @param {array} queue - A queue of playing song list.
- * @param {number} peekNum - A number which user wants to peek on the queue from the current song.
+ * @param {number} peekNum - A number which user wants to peek on the queue.
  * @return {object} A object with the peekQueue and playingQueue list.
  */
 
@@ -134,23 +132,35 @@ export function startPlayingWithSong(index, queue) {
   return queue;
 }
 
+/**
+ *  Set DynamicList as same as the given playlist. Happens when user change a playlist to shuffle
+ *
+ * @param {array} playlist - A playlist be selected.
+ */
 export function setDynamicList(playlist) {
   dynamicList = playlist.slice();
 }
 
-export function isSamePlaylist(listA, listB) {
-  let listAIds = [];
-  let listBIds = [];
-  listA.forEach(song => listAIds.push(song.songId));
-  listB.forEach(song => listBIds.push(song.songId));
+/**
+ *  Check whether the two given arrays have same element
+ *
+ * @param {array} arrA
+ * @param {array} arrB
+ * @return {boolean} Return true when two arrays have same element, which is arrA contains every element in arrB and arrB has every element in arrA.
+ */
 
-  return listAIds.length === listBIds.length && listAIds.sort().every(function (value, index) {
-    return value === listBIds.sort()[index]
+export function arraysWithSameElement(arrA, arrB) {
+  let arrAIds = [];
+  let arrBIds = [];
+  arrA.forEach(song => arrAIds.push(song.songId));
+  arrB.forEach(song => arrBIds.push(song.songId));
+  return arrAIds.length === arrBIds.length && arrAIds.sort().every(function (value, index) {
+    return value === arrBIds.sort()[index]
   });
 }
 
 /**
- *  Check the equality of two given array.
+ *  Check the equality of two given array and returns true only when two array with same element in same order
  *
  * @param {array} arr1
  * @param {array} arr2
