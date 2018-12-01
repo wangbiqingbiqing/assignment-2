@@ -198,10 +198,10 @@ export const SONGS_COLLECTION =
       }],
     playlist4: [],
     playlist5: [{
-      songId: 2,
-      songName: 'song 2',
-      artist: 'artist 2',
-      album: 'album 2',
+      songId: 1,
+      songName: 'song 1',
+      artist: 'artist 1',
+      album: 'album 1',
       time: '4:33'
     }],
     playlist6: [{
