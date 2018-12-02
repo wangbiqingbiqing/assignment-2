@@ -97,7 +97,7 @@ class PeekQueuePanel extends Component {
                     Next Up
                   </div>
                   <div><Typography gutterBottom>{message}</Typography></div>
-                  {this.props.peekList.length !== 0 &&
+                  {this.props.peekList.length !== 0 && this.props.isLoggedIn&&
                   <Paper>
                     <ListTable data={this.props.peekList} isPeekList={true}
                                skipSong={(queueIndex) => this.props.skipSong(queueIndex)}

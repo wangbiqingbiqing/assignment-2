@@ -31,7 +31,7 @@ const defaultState = {
   isLoggedIn: false,
   playLists: EMPTY_PLAYLISTS,
   playingQueue: [DEMO_AUDIO],
-  peekNum: 15
+  peekNum: 5
 };
 
 /**
