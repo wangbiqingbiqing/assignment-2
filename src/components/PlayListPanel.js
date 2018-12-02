@@ -19,6 +19,9 @@ const styles = {
   },
   margin: {
     marginTop: '50px'
+  },
+  link:{
+    textDecoration: 'none'
   }
 };
 
@@ -54,7 +57,7 @@ class PlayListPanel extends Component {
                 {this.props.playlistName}
                 {this.props.playlist.length === 0 ? null :
                   <IconButton color="inherit">
-                    <Link to="/peeklist" style={{textDecoration: 'none'}}>
+                    <Link to="/peeklist" className={classes.link}>
                       <Tooltip title="Shuffle this playlist" placement="right">
                         <Shuffle onClick={this.shufflePlaylist}/>
                       </Tooltip>

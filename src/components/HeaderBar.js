@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
 import React, {Component} from "react";
 import Link from "react-router-dom/es/Link";
-import logo from '../pictures/teamSpiritLogo.PNG';
+import logo from '../images/teamSpiritLogo.PNG';
 
 const styles = {
   toolBar: {
@@ -15,6 +15,10 @@ const styles = {
   image: {
     width: 30,
     height: 30,
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'white'
   }
 };
 
@@ -34,12 +38,12 @@ class HeaderBar extends Component {
           {
             this.props.isLoggedIn ?
               <div>
-                <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+                <Link to="/" className={classes.link}>
                   <Button color="inherit" onClick={this.props.logout}>LOGOUT</Button>
                 </Link>
               </div> :
               <div>
-                <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+                <Link to="/" className={classes.link}>
                   <Button color="inherit" onClick={this.props.login}>LOGIN</Button>
                 </Link>
               </div>

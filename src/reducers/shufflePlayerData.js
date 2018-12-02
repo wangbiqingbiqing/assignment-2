@@ -9,7 +9,7 @@ import {
   SET_PLAYLIST,
   SET_PLAYLISTS
 } from "../actions/actions";
-import {DEFAULT_PLAYLISTS, DEMO_AUDIO} from "../constants/states";
+import {EMPTY_PLAYLISTS, DEMO_AUDIO} from "../constants/states";
 
 /**
  * This is the default state in store
@@ -30,7 +30,7 @@ const defaultState = {
   peekList: [],
   currentSong: DEMO_AUDIO,
   isLoggedIn: false,
-  playLists: DEFAULT_PLAYLISTS,
+  playLists: EMPTY_PLAYLISTS,
   playingQueue: [DEMO_AUDIO],
   peekNum: 5
 };

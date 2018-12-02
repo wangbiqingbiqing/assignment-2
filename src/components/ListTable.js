@@ -30,7 +30,7 @@ class ListTable extends Component {
           </Tooltip>
         </IconButton>
         <IconButton variant="outlined" size="small" color="inherit">
-          <Tooltip title="Start with this song" placement="right">
+          <Tooltip title="Start from this song" placement="right">
             <PlayArrow onClick={() => this.props.jumpToPlay(j)}/>
           </Tooltip>
         </IconButton>
@@ -39,7 +39,7 @@ class ListTable extends Component {
     }
 
     return (
-      <Table>
+      <Table >
         <TableHead>
           <TableRow>
             <TableCell>No.</TableCell>

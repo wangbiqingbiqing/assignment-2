@@ -14,7 +14,7 @@ export const DEMO_AUDIO = {
  @type {string}
  @default This is the default playlist showing when user is logged out
  */
-export const DEFAULT_PLAYLISTS = 'Login to shuffle your own playlist!';
+export const EMPTY_PLAYLISTS = 'Login to shuffle your own playlist!';
 
 /** @constant
  @type {object}

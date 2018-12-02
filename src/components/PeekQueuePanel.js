@@ -30,6 +30,9 @@ const styles = {
     marginTop: '0px',
     marginBottom: '0px',
     marginLeft: '10px'
+  },
+  peekNum:{
+    float: 'right'
   }
 };
 
@@ -95,7 +98,7 @@ class PeekQueuePanel extends Component {
                     <div>
                       Next Up
                     </div>
-                    <div style={{float: 'right'}}>
+                    <div className={classes.peekNum}>
                       Peek Number
                       <TextField
                         className={classes.textField}
@@ -103,9 +106,6 @@ class PeekQueuePanel extends Component {
                         value={peekNum}
                         onChange={(event) => this.props.changePeekNumber(event.target.value)}
                         InputProps={{inputProps: {min: 0}}}
-                        inputProps={{
-                          'aria-label': 'peek number'
-                        }}
                       />
                     </div>
                   </div>

@@ -12,7 +12,7 @@ import VolumeUp from '@material-ui/icons/VolumeUp';
 import Slider from "@material-ui/lab/es/Slider/Slider";
 import React, {Component} from 'react'
 import Link from "react-router-dom/es/Link";
-import logo from '../pictures/teamSpiritLogo.PNG';
+import logo from '../images/teamSpiritLogo.PNG';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {
@@ -64,6 +64,13 @@ const styles = {
   },
   root: {
     width: '50%',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'white'
+  },
+  lensIcon:{
+    color: '#2196f3'
   }
 };
 
@@ -155,8 +162,7 @@ class BottomBar extends Component {
                       trackAfter: classes.trackAfter,
                       root: classes.root,
                     }}
-                    thumb={<LensIcon style={{color: '#2196f3'}}
-                    />}
+                    thumb={<LensIcon  className={classes.lensIcon}/>}
             />
           </div>
 
@@ -177,13 +183,13 @@ class BottomBar extends Component {
                       trackAfter: classes.trackAfter,
                       root: classes.root,
                     }}
-                    thumb={<LensIcon style={{color: '#2196f3'}}/>}
+                    thumb={<LensIcon className={classes.lensIcon}/>}
 
             />
 
             <div>
               <IconButton color="inherit" onClick={this.props.getPeekList}>
-                <Link to="/peeklist" style={{textDecoration: 'none', color: 'white'}}>
+                <Link to="/peeklist" className={classes.link}>
                   <Tooltip title="View Queue" placement="left">
                     <QueueMusic/>
                   </Tooltip>
