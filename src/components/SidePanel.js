@@ -1,7 +1,3 @@
-import Table from "@material-ui/core/es/Table/Table";
-import TableBody from "@material-ui/core/es/TableBody/TableBody";
-import TableCell from "@material-ui/core/es/TableCell/TableCell";
-import TableRow from "@material-ui/core/es/TableRow/TableRow";
 import {withStyles} from "@material-ui/core/styles/index";
 import Typography from "@material-ui/core/Typography/Typography";
 import React, {Component} from 'react';
@@ -17,6 +13,13 @@ const styles = {
   },
   margin: {
     marginTop: '50px'
+  },
+  playlist:{
+    borderBottom: 'grey solid 1px',
+    marginTop:'10px',
+    marginBottom:'10px',
+    textAlign:'center',
+    paddingBottom:'10px'
   }
 };
 
@@ -27,21 +30,18 @@ const styles = {
 class SidePanel extends Component {
   render() {
     const {classes} = this.props;
-    let tableData = [];
-    let i = 0;
+    let playlistData = [];
     if (typeof(this.props.data) === 'object') {
       this.props.data.forEach(listName => {
-          tableData.push(
-            <TableRow hover key={i}>
-              <TableCell key={listName} id={listName}
-                         onClick={(event) => this.props.openPlayList(event.currentTarget.id)}
-                         style={{textAlign:'center'}}>
-                <Link to="/playlist" style={{textDecoration: 'none', color: 'black'}}>
+          playlistData.push(
+              <Link to="/playlist" style={{textDecoration: 'none', color: 'black'}} key={listName}>
+                <div key={listName} id={listName}
+                     onClick={(event) => this.props.openPlayList(event.currentTarget.id)}
+                     className={classes.playlist}>
                   {listName}
-                </Link>
-              </TableCell>
-            </TableRow>);
-          i++;
+                </div>
+              </Link>
+            )
         }
       )
     }
@@ -52,14 +52,12 @@ class SidePanel extends Component {
           <Typography align="center" variant="h5" className={classes.margin}>
             PlayList
           </Typography>
-          <div style={{marginTop:'30px',textAlign:'center'}}>
-          {typeof(this.props.data) === 'string' ? this.props.data : null}
-          {tableData.length !== 0 &&
-          <Table>
-            <TableBody>
-              {tableData}
-            </TableBody>
-          </Table>}
+          <div style={{marginTop: '30px', textAlign: 'center'}}>
+            {typeof(this.props.data) === 'string' ? this.props.data : null}
+            {playlistData.length !== 0 &&
+            <div>
+              {playlistData}
+            </div>}
           </div>
         </div>
       </React.Fragment>
