@@ -1,3 +1,4 @@
+import withStyles from "@material-ui/core/es/styles/withStyles";
 import Table from "@material-ui/core/es/Table/Table";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import TableCell from "@material-ui/core/es/TableCell/TableCell";
@@ -10,6 +11,11 @@ import Redo from '@material-ui/icons/Redo';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Tooltip from '@material-ui/core/Tooltip';
 
+const styles = {
+  table: {
+    emptyCells: 'show'
+  }
+};
 class ListTable extends Component {
 
   render() {
@@ -39,7 +45,7 @@ class ListTable extends Component {
     }
 
     return (
-      <Table >
+      <Table className={this.props.classes.card}>
         <TableHead>
           <TableRow>
             <TableCell>No.</TableCell>
@@ -47,7 +53,7 @@ class ListTable extends Component {
             <TableCell>{SONG_KEY.ARTIST}</TableCell>
             <TableCell>{SONG_KEY.ALBUM}</TableCell>
             <TableCell>{SONG_KEY.TIME}</TableCell>
-            {this.props.isPeekList ?<TableCell></TableCell>:null}
+            {this.props.isPeekList ?<TableCell/>:null}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -59,4 +65,4 @@ class ListTable extends Component {
 
 }
 
-export default ListTable
+export default withStyles(styles)(ListTable)
