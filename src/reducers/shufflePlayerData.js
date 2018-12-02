@@ -3,7 +3,6 @@ import {
   SET_LOG_IN,
   SET_LOG_OUT,
   SET_PEEK_LIST,
-  SET_PEEK_NUM,
   SET_PLAYING_QUEUE,
   SET_PLAYLIST_NAME,
   SET_PLAYLIST,
@@ -32,7 +31,7 @@ const defaultState = {
   isLoggedIn: false,
   playLists: EMPTY_PLAYLISTS,
   playingQueue: [DEMO_AUDIO],
-  peekNum: 5
+  peekNum: 15
 };
 
 /**
@@ -72,11 +71,6 @@ export default function shufflePlayerData(state = defaultState, action) {
       return {
         ...state,
         playingQueue: action.queue
-      };
-    case SET_PEEK_NUM:
-      return {
-        ...state,
-        peekNum: action.peekNum
       };
     case SET_LOG_IN:
       return {

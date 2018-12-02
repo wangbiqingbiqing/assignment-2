@@ -1,26 +1,25 @@
-import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Paper from "@material-ui/core/Paper/Paper";
+import {withStyles} from "@material-ui/core/styles/index";
 import Table from "@material-ui/core/Table/Table";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
-import TextField from "@material-ui/core/TextField/TextField";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Typography from "@material-ui/core/Typography/Typography";
-import {withStyles} from "@material-ui/core/styles/index";
+import Shuffle from '@material-ui/icons/Shuffle';
 import React, {Component} from 'react';
 import {SONG_KEY} from "../constants/keys";
 import ListTable from "./ListTable";
-import Shuffle from '@material-ui/icons/Shuffle';
 
 const styles = {
   panelPosition: {
-    position:'absolute',
-    top:'68px',
-    bottom:'68px',
-    width:'83%',
+    position: 'absolute',
+    top: '68px',
+    bottom: '68px',
+    width: '83%',
     overflowY: 'auto'
   },
   margin: {
@@ -31,7 +30,7 @@ const styles = {
     marginBottom: '0px',
     marginLeft: '10px'
   },
-  peekNum:{
+  peekNum: {
     float: 'right'
   }
 };
@@ -41,12 +40,12 @@ class PeekQueuePanel extends Component {
   render() {
     const {classes} = this.props;
     const peekNum = this.props.peekNum;
-    let message ='';
-    if(!this.props.playlistName|| this.props.peekList.length === 0){
-      message='Please select a playlist to shuffle';
+    let message = '';
+    if (!this.props.playlistName || this.props.peekList.length === 0) {
+      message = 'Please select a playlist to shuffle';
     }
-    if(!this.props.isLoggedIn){
-      message='Please log in before shuffle play';
+    if (!this.props.isLoggedIn) {
+      message = 'Please log in before shuffle play';
     }
     return (
       <React.Fragment>
@@ -56,12 +55,12 @@ class PeekQueuePanel extends Component {
             <Grid item xs={10}>
               <Typography variant="h5" gutterBottom>
                 Play Queue
-                {this.props.peekList.length === 0?null:
+                {this.props.peekList.length === 0 ? null :
                   <IconButton color="inherit">
-                  <Tooltip title="Reshuffle the playing queue" placement="right">
-                    <Shuffle onClick={this.props.reshufflePlaylist}/>
-                  </Tooltip>
-                </IconButton>}
+                    <Tooltip title="Reshuffle the playing queue" placement="right">
+                      <Shuffle onClick={this.props.reshufflePlaylist}/>
+                    </Tooltip>
+                  </IconButton>}
               </Typography>
             </Grid>
             <Grid item xs={10}>
@@ -95,31 +94,17 @@ class PeekQueuePanel extends Component {
               <Grid container>
                 <Grid item xs={12}>
                   <div>
-                    <div>
-                      Next Up
-                    </div>
-                    <div className={classes.peekNum}>
-                      Peek Number
-                      <TextField
-                        className={classes.textField}
-                        type="number"
-                        value={peekNum}
-                        onChange={(event) => this.props.changePeekNumber(event.target.value)}
-                        InputProps={{inputProps: {min: 0}}}
-                      />
-                    </div>
+                    Next Up
                   </div>
-                </Grid>
-                <div><Typography  gutterBottom>{message}</Typography></div>
-                {this.props.peekList.length !== 0 &&
-                <Grid item xs={12}>
+                  <div><Typography gutterBottom>{message}</Typography></div>
+                  {this.props.peekList.length !== 0 &&
                   <Paper>
                     <ListTable data={this.props.peekList} isPeekList={true}
                                skipSong={(queueIndex) => this.props.skipSong(queueIndex)}
                                jumpToPlay={(queueIndex) => this.props.jumpToPlay(queueIndex)}
                                displayNum={peekNum}/>
-                  </Paper>
-                </Grid>}
+                  </Paper>}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

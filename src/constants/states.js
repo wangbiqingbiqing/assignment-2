@@ -57,13 +57,6 @@ export const SONGS_COLLECTION =
         artist: 'artist 5',
         album: 'album 5',
         time: '4:23'
-      },
-      {
-        songId: 6,
-        songName: 'song 6',
-        artist: 'artist 6',
-        album: 'album 6',
-        time: '5:00'
       }
     ],
 

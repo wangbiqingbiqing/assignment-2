@@ -64,15 +64,6 @@ export function setPlayingQueue(queue) {
   }
 }
 
-export const SET_PEEK_NUM = 'SET_PEEK_NUM';
-
-export function setPeekNum(peekNum) {
-  return {
-    type: SET_PEEK_NUM,
-    peekNum,
-  }
-}
-
 export const SET_LOG_IN = 'SET_LOG_IN';
 
 export function setLogin() {
@@ -171,17 +162,6 @@ export function jumpToPlaySong(playingIndex) {
     queue = startPlayingWithSong(playingIndex, queue);
     dispatch(setCurrent(queue[0]));
     dispatch(setPlayingQueue(queue));
-    dispatch(getPeekList());
-  }
-}
-
-/**
- * change peek number
- * update peek number's state with updated peek list state
- */
-export function changePeekNum(peekNum) {
-  return (dispatch) => {
-    dispatch(setPeekNum(peekNum));
     dispatch(getPeekList());
   }
 }
