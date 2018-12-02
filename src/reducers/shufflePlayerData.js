@@ -5,18 +5,29 @@ import {
   SET_PEEK_LIST,
   SET_PEEK_NUM,
   SET_PLAYING_QUEUE,
+  SET_PLAYLIST_NAME,
   SET_PLAYLIST,
-  SET_PLAYLISTS,
-  TURN_OFF_PLAYER,
-  TURN_ON_PLAYER, SET_PLAYLEST_NAME
+  SET_PLAYLISTS
 } from "../actions/actions";
 import {DEFAULT_PLAYLISTS, DEMO_AUDIO} from "../constants/states";
 
+/**
+ * This is the default state in store
+ *
+ * playlist - an array of songs indicates the selected playlist
+ * playlistName - a string of selected playlist name
+ * peekList - an array of next playing songs with the number of peekNum
+ * currentSong - an object Song indicates current playing song
+ * isLoggedIn - a boolean of login state
+ * playlists - an array of playlists' name
+ * playingQueue - an array of songs indicates playing songs' order starting with the currentSong
+ * peekNum - a number set by user indicates how many song they want to check
+ */
+
 const defaultState = {
   playlist: [],
-  playlistName:'',
+  playlistName: '',
   peekList: [],
-  isTurnedOn: false,
   currentSong: DEMO_AUDIO,
   isLoggedIn: false,
   playLists: DEFAULT_PLAYLISTS,
@@ -24,22 +35,18 @@ const defaultState = {
   peekNum: 5
 };
 
+/**
+ * This is a reducer, a pure function with (state, action) => state signature.
+ * It describes how actions transform the state into the next state.
+ *
+ */
+
 export default function shufflePlayerData(state = defaultState, action) {
   switch (action.type) {
     case SET_CURRENT_SONG:
       return {
         ...state,
         currentSong: action.song,
-      };
-    case TURN_ON_PLAYER:
-      return {
-        ...state,
-        isTurnedOn: true,
-      };
-    case TURN_OFF_PLAYER:
-      return {
-        ...state,
-        isTurnedOn: false,
       };
     case SET_PLAYLISTS:
       return {
@@ -51,26 +58,10 @@ export default function shufflePlayerData(state = defaultState, action) {
         ...state,
         playlist: [...action.playlist],
       };
-    case SET_PLAYLEST_NAME:
-      return{
-        ...state,
-        playlistName:action.listName,
-      };
-    case SET_LOG_IN:
+    case SET_PLAYLIST_NAME:
       return {
         ...state,
-        isLoggedIn: true,
-      };
-    case SET_LOG_OUT:
-      return {
-        currentSong: DEMO_AUDIO,
-        playlist: [],
-        isLoggedIn: false,
-        peekList: [],
-        playLists: DEFAULT_PLAYLISTS,
-        isTurnedOn: false,
-        playingQueue: [DEMO_AUDIO],
-        peekNum: 5
+        playlistName: action.listName,
       };
     case SET_PEEK_LIST:
       return {
@@ -87,7 +78,13 @@ export default function shufflePlayerData(state = defaultState, action) {
         ...state,
         peekNum: action.peekNum
       };
+    case SET_LOG_IN:
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    case SET_LOG_OUT:
     default:
-      return state
+      return defaultState
   }
 }

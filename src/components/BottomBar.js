@@ -72,6 +72,7 @@ class BottomBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isPlayOn:false,
       mute: false,
       playingTime: 0,
       volume: 50,
@@ -85,6 +86,7 @@ class BottomBar extends Component {
   }
 
   playNext() {
+    this.setState({isPlayOn:true});
     if (this.props.isLoggedIn) {
       this.props.playNext();
     }
@@ -134,7 +136,7 @@ class BottomBar extends Component {
 
           <div className={classes.playActions}>
             <IconButton color="inherit">
-              {!this.props.isPlayOn ?
+              {!this.state.isPlayOn ?
                 <PlayArrow onClick={this.props.handleSwitchOn}/> :
                 <Pause onClick={this.props.handleSwitchOff}/>}
             </IconButton>

@@ -39,8 +39,8 @@ class PeekQueuePanel extends Component {
     const {classes} = this.props;
     const peekNum = this.props.peekNum;
     let message ='';
-    if(!this.props.playlistName){
-      message='Please select a playlist before shuffle play';
+    if(!this.props.playlistName|| this.props.peekList.length === 0){
+      message='Please select a playlist to shuffle';
     }
     if(!this.props.isLoggedIn){
       message='Please log in before shuffle play';

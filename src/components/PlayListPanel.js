@@ -56,15 +56,17 @@ class PlayListPanel extends Component {
                   <IconButton color="inherit">
                     <Link to="/peeklist" style={{textDecoration: 'none'}}>
                       <Tooltip title="Shuffle this playlist" placement="right">
-                      <Shuffle onClick={this.shufflePlaylist}/>
+                        <Shuffle onClick={this.shufflePlaylist}/>
                       </Tooltip>
                     </Link>
                   </IconButton>
                 }
               </Typography>
-            </Grid>
 
-            <div>{message}</div>
+            </Grid>
+            <Grid item xs={10}>
+              <div>{message}</div>
+            </Grid>
             {
               this.props.playlist.length !== 0 &&
               <Grid item xs={10}>
