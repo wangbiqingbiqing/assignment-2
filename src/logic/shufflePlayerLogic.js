@@ -24,7 +24,7 @@ function shuffle(array) {
  *
  * When there is 0 song, return queue as it is
  * When there is 1 song, directly append to queue
- * When there is 2 songs, change the order to differentiate from last round and append to queue
+ * When there is 2 songs, directly append to queue to avoid the same song in a row case,except reset mode
  * if it's reset operation, arrange playlist to guarantee the first song of the new round is different from the current playing song
  * When there is more than 2 songs, shuffle the playlist to guarantee its order is different from last round,
  * if it's reset song operation, the first song of the new round is different from the current playing song;
@@ -43,7 +43,7 @@ export function setSong(dynamicList, queue, resetFlag = false) {
     queue.push(dynamicList[0]);
     return queue;
   } else if (dynamicList.length === 2) {
-    if ((resetFlag && queue[0].songId === dynamicList[0].songId) || !resetFlag) {
+    if (resetFlag && queue[0].songId === dynamicList[0].songId)  {
       const first = dynamicList[0];
       dynamicList.shift();
       dynamicList.push(first);
